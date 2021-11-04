@@ -1,21 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import Recipes from "./src/components/Recipes";
+import recipes from "./recipes";
+import SearchBar from "./src/components/SearchBar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <View style={styles.container}>
+        <SearchBar />
+        <Recipes recipes={recipes} />
+      </View>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: "5%",
+    paddingTop: "15%",
+    paddingBottom: "35%",
+  },
+  searchContainer: {
+    height: 50,
+    borderRadius: 10,
+    backgroundColor: "#E2E2E2",
+    marginBottom: 20,
+    padding: 10,
+    flexDirection: "row",
+  },
+  searchIcon: {
+    width: 30,
+    height: 30,
+  },
+  searchInput: {
+    marginLeft: 10,
+    fontFamily: "Roboto",
+    fontSize: 18,
+    maxWidth: "100%",
   },
 });
