@@ -3,16 +3,13 @@ import { StyleSheet, View } from "react-native";
 import Recipes from "./src/components/Recipes";
 import recipes from "./recipes";
 import SearchBar from "./src/components/SearchBar";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <View style={styles.container}>
-        <SearchBar />
-        <Recipes recipes={recipes} />
-      </View>
-    </SafeAreaProvider>
+    <View style={styles.container}>
+      <SearchBar />
+      <Recipes recipes={recipes} />
+    </View>
   );
 }
 

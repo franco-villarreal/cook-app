@@ -8,7 +8,11 @@ const SearchBar = () => {
         style={styles.searchIcon}
         source={require("../icons/search_black.png")}
       ></Image>
-      <TextInput style={styles.searchInput} placeholder="Search"></TextInput>
+      <TextInput
+        style={styles.searchInput}
+        maxLength={25}
+        placeholder="Search"
+      ></TextInput>
     </View>
   );
 };

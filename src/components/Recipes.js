@@ -6,10 +6,6 @@ const Recipes = ({ recipes }) => {
   // TODO: Delete line 7 log
   console.log(recipes);
 
-  const toggleFavourites = (item) => {
-    console.log(`id: ${item.id} added to favourites!`);
-  };
-
   return (
     <View>
       <FlatList
@@ -18,10 +14,6 @@ const Recipes = ({ recipes }) => {
         renderItem={({ item }) => (
           <View key={item.id}>
             <Recipe recipe={item}></Recipe>
-            <Button
-              title="Add to favourites!"
-              onPress={() => toggleFavourites(item)}
-            />
           </View>
         )}
       />

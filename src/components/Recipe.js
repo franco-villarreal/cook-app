@@ -1,20 +1,46 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
 
 const Recipe = ({ recipe }) => {
-  // TODO: Delete line 6 log
-  console.log(recipe);
+  const starIconSrc = require("../icons/star.png");
+  const clockIconSrc = require("../icons/clock_black.png");
+  const isFavouriteIconSrc = require("../icons/filled_heart_black.png");
+  const isNotFavouriteIconSrc = require("../icons/heart_black.png");
+  const stars = [];
+  let isFavourite = false;
+
+  for (let i = 0; i < recipe.valoration; i++) {
+    stars.push(<Image style={styles.starIcon} source={starIconSrc}></Image>);
+  }
+  const handleFavourites = () => {
+    isFavourite = !isFavourite;
+    console.log(`${recipe.id} isFavourite? : ${isFavourite}`);
+  };
 
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: recipe.url }} />
       <View style={styles.recipeDataContainer}>
-        <Text style={styles.title}>{recipe.title}</Text>
-        <Text style={styles.preparationTimeInMins}>
-          {recipe.preparationTimeInMins}
-        </Text>
-        <Text style={styles.valoration}>{recipe.valoration}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{recipe.title}</Text>
+          <TouchableOpacity
+            style={styles.favouriteToucheable}
+            onPress={handleFavourites}
+          >
+            <Image
+              style={styles.favouriteIcon}
+              source={isFavourite ? isFavouriteIconSrc : isNotFavouriteIconSrc}
+            ></Image>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.valorationStarsContainer}>{stars}</View>
+        <View style={styles.preparationTimeContainer}>
+          <Image style={styles.clockIcon} source={clockIconSrc}></Image>
+          <Text style={styles.preparationTimeInMins}>
+            {recipe.preparationTimeInMins} min
+          </Text>
+        </View>
+
         <Text style={styles.description}>{recipe.description}</Text>
         <Text style={styles.user}>by {recipe.user}</Text>
       </View>
@@ -52,16 +78,48 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontSize: 24,
   },
+  titleContainer: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+  },
   title: {
     color: "#000000",
     fontSize: 20,
   },
-  preparationTimeInMins: {},
+  favouriteToucheable: {},
+  favouriteIcon: {
+    marginLeft: 5,
+    width: 25,
+    height: 25,
+  },
+  valorationStarsContainer: {
+    marginTop: 5,
+    flexDirection: "row",
+    alignItems: "flex-end",
+  },
+  starIcon: {
+    width: 20,
+    height: 20,
+  },
+  preparationTimeContainer: {
+    marginTop: 5,
+    flexDirection: "row",
+    alignItems: "flex-end",
+  },
+  preparationTimeInMins: {
+    marginLeft: 5,
+  },
+  clockIcon: {
+    width: 18,
+    height: 18,
+  },
   valoration: {},
   description: {
+    marginTop: 10,
     color: "#000000",
   },
   user: {
+    marginTop: 5,
     color: "#a2a2a2",
     marginBottom: 5,
   },
