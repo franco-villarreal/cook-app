@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 
 const Recipe = ({ recipe }) => {
   const starIconSrc = require("../icons/star.png");
@@ -10,11 +17,19 @@ const Recipe = ({ recipe }) => {
   let isFavourite = false;
 
   for (let i = 0; i < recipe.valoration; i++) {
-    stars.push(<Image style={styles.starIcon} source={starIconSrc}></Image>);
+    stars.push(
+      <Image key={i} style={styles.starIcon} source={starIconSrc}></Image>
+    );
   }
   const handleFavourites = () => {
     isFavourite = !isFavourite;
     console.log(`${recipe.id} isFavourite? : ${isFavourite}`);
+    Alert.alert(
+      null,
+      isFavourite
+        ? `${recipe.title} added to favourites!`
+        : `${recipe.title} removed from favourites!`
+    );
   };
 
   return (
