@@ -1,35 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Image,
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert,
+  ToastAndroid,
+  AlertIOS,
+  Platform,
 } from "react-native";
+import Colors from "../constants/colors";
+
+const isFavouriteIconSrc = require("../icons/filled_heart_black.png");
+const isNotFavouriteIconSrc = require("../icons/heart_black.png");
+const starIconSrc = require("../icons/star.png");
+const clockIconSrc = require("../icons/clock_black.png");
 
 const Recipe = ({ recipe }) => {
-  const starIconSrc = require("../icons/star.png");
-  const clockIconSrc = require("../icons/clock_black.png");
-  const isFavouriteIconSrc = require("../icons/filled_heart_black.png");
-  const isNotFavouriteIconSrc = require("../icons/heart_black.png");
+  const [isFavourite, setIsFavourite] = useState(false);
+  const [favouriteIconType, setFavouriteIconType] = useState(
+    isNotFavouriteIconSrc
+  );
+
   const stars = [];
-  let isFavourite = false;
 
   for (let i = 0; i < recipe.valoration; i++) {
     stars.push(
       <Image key={i} style={styles.starIcon} source={starIconSrc}></Image>
     );
   }
+
   const handleFavourites = () => {
-    isFavourite = !isFavourite;
-    console.log(`${recipe.id} isFavourite? : ${isFavourite}`);
-    Alert.alert(
-      null,
-      isFavourite
-        ? `${recipe.title} added to favourites!`
-        : `${recipe.title} removed from favourites!`
+    setIsFavourite(isFavourite ? false : true);
+    setFavouriteIconType(
+      isFavourite ? isFavouriteIconSrc : isNotFavouriteIconSrc
     );
+    console.log(`${recipe.id} isFavourite? : ${isFavourite}`);
+    notify();
+  };
+
+  const notify = () => {
+    const msg = isFavourite
+      ? `${recipe.title} added to favourites!`
+      : `${recipe.title} removed from favourites!`;
+    if (Platform.OS === "android") {
+      ToastAndroid.show(msg, ToastAndroid.SHORT);
+    } else {
+      AlertIOS.alert(msg);
+    }
   };
 
   return (
@@ -44,7 +62,7 @@ const Recipe = ({ recipe }) => {
           >
             <Image
               style={styles.favouriteIcon}
-              source={isFavourite ? isFavouriteIconSrc : isNotFavouriteIconSrc}
+              source={favouriteIconType}
             ></Image>
           </TouchableOpacity>
         </View>
@@ -55,9 +73,12 @@ const Recipe = ({ recipe }) => {
             {recipe.preparationTimeInMins} min
           </Text>
         </View>
-
-        <Text style={styles.description}>{recipe.description}</Text>
-        <Text style={styles.user}>by {recipe.user}</Text>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.description}>{recipe.description}</Text>
+        </View>
+        <View style={styles.userContainer}>
+          <Text style={styles.user}>by {recipe.user}</Text>
+        </View>
       </View>
     </View>
   );
@@ -92,18 +113,23 @@ const styles = StyleSheet.create({
     color: "#000000",
     fontFamily: "Roboto",
     fontSize: 24,
+    flex: 1,
   },
   titleContainer: {
     flexDirection: "row",
-    alignItems: "flex-end",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    flex: 1,
   },
   title: {
     color: "#000000",
     fontSize: 20,
+    flex: 5,
   },
-  favouriteToucheable: {},
+  favouriteToucheable: {
+    flex: 1,
+  },
   favouriteIcon: {
-    marginLeft: 5,
     width: 25,
     height: 25,
   },
@@ -111,6 +137,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     flexDirection: "row",
     alignItems: "flex-end",
+    flex: 1,
   },
   starIcon: {
     width: 20,
@@ -120,6 +147,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     flexDirection: "row",
     alignItems: "flex-end",
+    flex: 1,
   },
   preparationTimeInMins: {
     marginLeft: 5,
@@ -129,14 +157,20 @@ const styles = StyleSheet.create({
     height: 18,
   },
   valoration: {},
+  descriptionContainer: {
+    flex: 3,
+  },
   description: {
     marginTop: 10,
     color: "#000000",
   },
+  userContainer: {
+    alignItems: "flex-end",
+    flex: 1,
+  },
   user: {
-    marginTop: 5,
-    color: "#a2a2a2",
-    marginBottom: 5,
+    marginVertical: 5,
+    color: Colors.secondaryText,
   },
 });
 
