@@ -1,40 +1,31 @@
-import React from "react";
+import AppLoading from "expo-app-loading";
+import { useFonts } from "expo-font";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import Recipes from "./src/components/Recipes";
-import recipes from "./recipes";
-import SearchBar from "./src/components/SearchBar";
-
+import HomeScreen from "./src/screens/HomeScreen";
+import RecipeDetailScreen from "./src/screens/RecipeDetailScreen";
 export default function App() {
+  const [loaded] = useFonts({
+    "Roboto-Regular": require("./assets/fonts/Roboto/Roboto-Regular.ttf"),
+  });
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+
+  if (!loaded) return <AppLoading />;
+
   return (
     <View style={styles.container}>
-      <SearchBar />
-      <Recipes recipes={recipes} />
+      {selectedRecipe ? (
+        <RecipeDetailScreen
+          recipe={selectedRecipe}
+          setSelectedRecipe={setSelectedRecipe}
+        />
+      ) : (
+        <HomeScreen setSelectedRecipe={setSelectedRecipe} />
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: "5%",
-    paddingTop: "15%",
-    paddingBottom: "35%",
-  },
-  searchContainer: {
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: "#E2E2E2",
-    marginBottom: 20,
-    padding: 10,
-    flexDirection: "row",
-  },
-  searchIcon: {
-    width: 30,
-    height: 30,
-  },
-  searchInput: {
-    marginLeft: 10,
-    fontFamily: "Roboto",
-    fontSize: 18,
-    maxWidth: "100%",
-  },
+  container: {},
 });
