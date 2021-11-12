@@ -1,9 +1,11 @@
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
+import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 import HomeScreen from "./src/screens/HomeScreen";
 import RecipeDetailScreen from "./src/screens/RecipeDetailScreen";
+
 export default function App() {
   const [loaded] = useFonts({
     "Roboto-Regular": require("./assets/fonts/Roboto/Roboto-Regular.ttf"),
@@ -13,7 +15,8 @@ export default function App() {
   if (!loaded) return <AppLoading />;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="auto" />
       {selectedRecipe ? (
         <RecipeDetailScreen
           recipe={selectedRecipe}
@@ -22,7 +25,7 @@ export default function App() {
       ) : (
         <HomeScreen setSelectedRecipe={setSelectedRecipe} />
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 

@@ -33,9 +33,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     flexDirection: "row",
   },
-  starIcon: {
-    width: 20,
-    height: 20,
-  },
+  starIcon: {},
 });
 export default ValorationStars;

@@ -1,13 +1,12 @@
 import React from "react";
 import { Image, StyleSheet, TextInput, View } from "react-native";
 
+const searchIconSrc = require("../icons/search_black.png");
+
 const SearchBar = () => {
   return (
     <View style={styles.searchContainer}>
-      <Image
-        style={styles.searchIcon}
-        source={require("../icons/search_black.png")}
-      ></Image>
+      <Image style={styles.searchIcon} source={searchIconSrc}></Image>
       <TextInput
         style={styles.searchInput}
         maxLength={25}

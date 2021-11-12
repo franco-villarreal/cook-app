@@ -10,8 +10,13 @@ import Colors from "../constants/colors";
 import PreparationTime from "./PreparationTime";
 import ValorationStars from "./ValorationStars";
 import FavouriteButton from "./FavouritesButton";
+import Device from "../constants/device";
 
-const RecipeCard = ({ recipe, setSelectedRecipe }) => {
+const RecipeCard = ({
+  recipe,
+  favouritesFeature = true,
+  setSelectedRecipe,
+}) => {
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -23,9 +28,9 @@ const RecipeCard = ({ recipe, setSelectedRecipe }) => {
         <View style={styles.recipeDataContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{recipe.title}</Text>
-            <FavouriteButton recipe={recipe} />
+            {favouritesFeature && <FavouriteButton recipe={recipe} />}
           </View>
-          <ValorationStars valoration={recipe.valoration} size="22" />
+          <ValorationStars valoration={recipe.valoration} size="18" />
           <PreparationTime
             preparationTimeInMins={recipe.preparationTimeInMins}
           />
@@ -44,7 +49,8 @@ const RecipeCard = ({ recipe, setSelectedRecipe }) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 250,
+    minHeight: Device.windowHeight / 4,
+    maxHeight: 250,
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
     marginBottom: 15,
@@ -55,7 +61,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
-    elevation: 2,
+    elevation: 5,
     flexDirection: "row",
   },
   image: {
@@ -77,7 +83,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-between",
-    flex: 1,
   },
   title: {
     color: "#000000",
@@ -94,10 +99,9 @@ const styles = StyleSheet.create({
   },
   userContainer: {
     alignItems: "flex-end",
-    flex: 1,
+    margin: 5,
   },
   user: {
-    marginVertical: 5,
     color: Colors.secondaryText,
   },
 });

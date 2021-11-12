@@ -9,7 +9,7 @@ const Recipes = ({ recipes, setSelectedRecipe }) => {
   return (
     <View>
       <FlatList
-        contentContainerStyle={{ paddingBottom: "45%" }}
+        contentContainerStyle={{ paddingBottom: 200 }}
         data={recipes}
         keyExtractor={(recipe) => recipe.id}
         renderItem={({ item }) => (

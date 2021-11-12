@@ -51,11 +51,16 @@ const RecipeDetail = ({ recipe, setSelectRecipe }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    borderTopRightRadius: 100,
+    borderTopLeftRadius: 100,
+  },
   image: {
-    marginTop: -100,
+    marginTop: -50,
     height: 600,
     width: "100%",
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
   },
   recipeDataContainer: {
     marginHorizontal: 10,

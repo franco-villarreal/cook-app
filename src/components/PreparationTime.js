@@ -5,7 +5,7 @@ const clockIconSrc = require("../icons/clock_black.png");
 
 const PreparationTime = ({
   preparationTimeInMins,
-  size = "20",
+  size = "18",
   direction = "row",
 }) => {
   return (
@@ -36,17 +36,13 @@ const PreparationTime = ({
 
 const styles = StyleSheet.create({
   preparationTimeContainer: {
-    marginVertical: 5,
     flexDirection: "row",
     alignItems: "center",
   },
   preparationTimeInMins: {
     marginHorizontal: 5,
   },
-  clockIcon: {
-    width: 18,
-    height: 18,
-  },
+  clockIcon: {},
 });
 
 export default PreparationTime;

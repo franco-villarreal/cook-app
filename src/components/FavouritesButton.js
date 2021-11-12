@@ -8,7 +8,7 @@ import {
   Platform,
 } from "react-native";
 
-const FavouriteButton = ({ recipe, size = "25", black = true }) => {
+const FavouriteButton = ({ recipe, size = "28", black = true }) => {
   const isFavouriteIconSrc = black
     ? require("../icons/filled_heart_black.png")
     : require("../icons/filled_heart_white.png");
@@ -55,7 +55,7 @@ const FavouriteButton = ({ recipe, size = "25", black = true }) => {
 
 const styles = StyleSheet.create({
   favouriteToucheable: {
-    padding: 10,
+    paddingHorizontal: 10,
     flex: 1,
     zIndex: 1,
     alignItems: "flex-end",
