@@ -4,7 +4,7 @@ const getNewUniqueId = () => {
 
 const recipes = [
   {
-    id: getNewUniqueId(),
+    id: "1",
     title: "Sea Salad",
     preparationTimeInMins: 30,
     valoration: 4,
@@ -16,7 +16,7 @@ const recipes = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat finibus massa vitae viverra. Proin vitae ornare ipsum. Aenean pharetra, sem ut tempus lobortis, turpis nisi varius lacus, non sodales felis lectus non turpis. Nullam et dapibus sapien, quis finibus metus. Nunc accumsan lacus nec dignissim rhoncus. Duis vestibulum tellus enim, vitae imperdiet est dapibus non. Curabitur facilisis faucibus magna, non pretium est. Morbi nisi augue, ultrices eu eros eget, condimentum dictum quam. Etiam hendrerit ligula est, at finibus purus tempus vel. Morbi auctor volutpat ante eget rutrum. Fusce interdum in neque sollicitudin aliquet. Proin maximus, turpis at bibendum condimentum, ante tellus maximus augue, vel rhoncus nisl diam vitae sem. ",
   },
   {
-    id: getNewUniqueId(),
+    id: "2",
     title: "Crispy Burger",
     preparationTimeInMins: 60,
     valoration: 5,
@@ -28,7 +28,7 @@ const recipes = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat finibus massa vitae viverra. Proin vitae ornare ipsum. Aenean pharetra, sem ut tempus lobortis, turpis nisi varius lacus, non sodales felis lectus non turpis. Nullam et dapibus sapien, quis finibus metus. Nunc accumsan lacus nec dignissim rhoncus. Duis vestibulum tellus enim, vitae imperdiet est dapibus non. Curabitur facilisis faucibus magna, non pretium est. Morbi nisi augue, ultrices eu eros eget, condimentum dictum quam. Etiam hendrerit ligula est, at finibus purus tempus vel. Morbi auctor volutpat ante eget rutrum. Fusce interdum in neque sollicitudin aliquet. Proin maximus, turpis at bibendum condimentum, ante tellus maximus augue, vel rhoncus nisl diam vitae sem. ",
   },
   {
-    id: getNewUniqueId(),
+    id: "3",
     title: "Funny Eggs",
     preparationTimeInMins: 20,
     valoration: 4,
@@ -40,7 +40,7 @@ const recipes = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat finibus massa vitae viverra. Proin vitae ornare ipsum. Aenean pharetra, sem ut tempus lobortis, turpis nisi varius lacus, non sodales felis lectus non turpis. Nullam et dapibus sapien, quis finibus metus. Nunc accumsan lacus nec dignissim rhoncus. Duis vestibulum tellus enim, vitae imperdiet est dapibus non. Curabitur facilisis faucibus magna, non pretium est. Morbi nisi augue, ultrices eu eros eget, condimentum dictum quam. Etiam hendrerit ligula est, at finibus purus tempus vel. Morbi auctor volutpat ante eget rutrum. Fusce interdum in neque sollicitudin aliquet. Proin maximus, turpis at bibendum condimentum, ante tellus maximus augue, vel rhoncus nisl diam vitae sem. ",
   },
   {
-    id: getNewUniqueId(),
+    id: "4",
     title: "Meat Balls",
     preparationTimeInMins: 90,
     valoration: 3,
@@ -52,7 +52,7 @@ const recipes = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat finibus massa vitae viverra. Proin vitae ornare ipsum. Aenean pharetra, sem ut tempus lobortis, turpis nisi varius lacus, non sodales felis lectus non turpis. Nullam et dapibus sapien, quis finibus metus. Nunc accumsan lacus nec dignissim rhoncus. Duis vestibulum tellus enim, vitae imperdiet est dapibus non. Curabitur facilisis faucibus magna, non pretium est. Morbi nisi augue, ultrices eu eros eget, condimentum dictum quam. Etiam hendrerit ligula est, at finibus purus tempus vel. Morbi auctor volutpat ante eget rutrum. Fusce interdum in neque sollicitudin aliquet. Proin maximus, turpis at bibendum condimentum, ante tellus maximus augue, vel rhoncus nisl diam vitae sem. ",
   },
   {
-    id: getNewUniqueId(),
+    id: "5",
     title: "Onion Rings",
     preparationTimeInMins: 75,
     valoration: 5,
@@ -64,7 +64,7 @@ const recipes = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat finibus massa vitae viverra. Proin vitae ornare ipsum. Aenean pharetra, sem ut tempus lobortis, turpis nisi varius lacus, non sodales felis lectus non turpis. Nullam et dapibus sapien, quis finibus metus. Nunc accumsan lacus nec dignissim rhoncus. Duis vestibulum tellus enim, vitae imperdiet est dapibus non. Curabitur facilisis faucibus magna, non pretium est. Morbi nisi augue, ultrices eu eros eget, condimentum dictum quam. Etiam hendrerit ligula est, at finibus purus tempus vel. Morbi auctor volutpat ante eget rutrum. Fusce interdum in neque sollicitudin aliquet. Proin maximus, turpis at bibendum condimentum, ante tellus maximus augue, vel rhoncus nisl diam vitae sem. ",
   },
   {
-    id: getNewUniqueId(),
+    id: "6",
     title: "Honey Cakes",
     preparationTimeInMins: 45,
     valoration: 5,
@@ -76,7 +76,7 @@ const recipes = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat finibus massa vitae viverra. Proin vitae ornare ipsum. Aenean pharetra, sem ut tempus lobortis, turpis nisi varius lacus, non sodales felis lectus non turpis. Nullam et dapibus sapien, quis finibus metus. Nunc accumsan lacus nec dignissim rhoncus. Duis vestibulum tellus enim, vitae imperdiet est dapibus non. Curabitur facilisis faucibus magna, non pretium est. Morbi nisi augue, ultrices eu eros eget, condimentum dictum quam. Etiam hendrerit ligula est, at finibus purus tempus vel. Morbi auctor volutpat ante eget rutrum. Fusce interdum in neque sollicitudin aliquet. Proin maximus, turpis at bibendum condimentum, ante tellus maximus augue, vel rhoncus nisl diam vitae sem. ",
   },
   {
-    id: getNewUniqueId(),
+    id: "7",
     title: "Super Soup",
     preparationTimeInMins: 60,
     valoration: 5,
@@ -88,7 +88,7 @@ const recipes = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat finibus massa vitae viverra. Proin vitae ornare ipsum. Aenean pharetra, sem ut tempus lobortis, turpis nisi varius lacus, non sodales felis lectus non turpis. Nullam et dapibus sapien, quis finibus metus. Nunc accumsan lacus nec dignissim rhoncus. Duis vestibulum tellus enim, vitae imperdiet est dapibus non. Curabitur facilisis faucibus magna, non pretium est. Morbi nisi augue, ultrices eu eros eget, condimentum dictum quam. Etiam hendrerit ligula est, at finibus purus tempus vel. Morbi auctor volutpat ante eget rutrum. Fusce interdum in neque sollicitudin aliquet. Proin maximus, turpis at bibendum condimentum, ante tellus maximus augue, vel rhoncus nisl diam vitae sem. ",
   },
   {
-    id: getNewUniqueId(),
+    id: "8",
     title: "Strawberry Cake",
     preparationTimeInMins: 90,
     valoration: 5,

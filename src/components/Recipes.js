@@ -1,24 +1,31 @@
 import React from "react";
-import { View, FlatList, Button } from "react-native";
+import {
+  View,
+  FlatList,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+  TouchableHighlight,
+} from "react-native";
 import RecipeCard from "./RecipeCard";
 
-const Recipes = ({ recipes, setSelectedRecipe }) => {
-  // TODO: Delete line 7 log
-  console.log(recipes);
-
+const Recipes = ({ recipes, navigation }) => {
+  const handleCardTouch = (item) => {
+    navigation.navigate("RecipeDetail", { recipe: item });
+  };
   return (
     <View>
       <FlatList
-        contentContainerStyle={{ paddingBottom: 200 }}
         data={recipes}
         keyExtractor={(recipe) => recipe.id}
         renderItem={({ item }) => (
-          <View key={item.id}>
-            <RecipeCard
-              recipe={item}
-              setSelectedRecipe={setSelectedRecipe}
-            ></RecipeCard>
-          </View>
+          <TouchableWithoutFeedback
+            key={item.id}
+            onPress={() => handleCardTouch(item)}
+          >
+            <View>
+              <RecipeCard recipe={item}></RecipeCard>
+            </View>
+          </TouchableWithoutFeedback>
         )}
       />
     </View>

@@ -2,10 +2,8 @@ import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import ValorationStars from "./ValorationStars";
 import PreparationTime from "./PreparationTime";
-import UnselectRecipe from "./UnselectRecipe";
-import FavouriteButton from "./FavouritesButton";
 
-const RecipeDetail = ({ recipe, setSelectRecipe }) => {
+const RecipeDetail = ({ recipe }) => {
   return (
     <View>
       <ScrollView style={styles.container}>
@@ -14,10 +12,7 @@ const RecipeDetail = ({ recipe, setSelectRecipe }) => {
             flexDirection: "row",
             alignItems: "center",
           }}
-        >
-          <UnselectRecipe setSelectedRecipe={setSelectRecipe} />
-          <FavouriteButton recipe={recipe} size="40" black={false} />
-        </View>
+        ></View>
         <Image style={styles.image} source={{ uri: recipe.url }}></Image>
         <View style={styles.recipeDataContainer}>
           <PreparationTime
@@ -56,11 +51,9 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 100,
   },
   image: {
-    marginTop: -50,
     height: 600,
     width: "100%",
-    borderTopRightRadius: 15,
-    borderTopLeftRadius: 15,
+    marginTop: -50,
   },
   recipeDataContainer: {
     marginHorizontal: 10,

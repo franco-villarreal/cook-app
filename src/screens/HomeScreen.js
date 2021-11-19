@@ -1,19 +1,16 @@
 import React from "react";
 import { View } from "react-native";
-import SearchBar from "../components/SearchBar";
 import Recipes from "../components/Recipes";
 import recipes from "../../recipes";
 
-const HomeScreen = ({ setSelectedRecipe }) => {
+const HomeScreen = ({ navigation }) => {
   return (
     <View
       style={{
         padding: 10,
-        paddingTop: "15%",
       }}
     >
-      <SearchBar />
-      <Recipes recipes={recipes} setSelectedRecipe={setSelectedRecipe} />
+      <Recipes recipes={recipes} navigation={navigation} />
     </View>
   );
 };

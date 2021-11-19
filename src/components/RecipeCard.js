@@ -1,48 +1,28 @@
 import React from "react";
-import {
-  View,
-  Image,
-  Text,
-  StyleSheet,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 import Colors from "../constants/colors";
 import PreparationTime from "./PreparationTime";
 import ValorationStars from "./ValorationStars";
-import FavouriteButton from "./FavouritesButton";
 import Device from "../constants/device";
 
-const RecipeCard = ({
-  recipe,
-  favouritesFeature = true,
-  setSelectedRecipe,
-}) => {
+const RecipeCard = ({ recipe, favouritesFeature = true }) => {
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        setSelectedRecipe(recipe);
-      }}
-    >
-      <View style={styles.container}>
-        <Image style={styles.image} source={{ uri: recipe.url }} />
-        <View style={styles.recipeDataContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>{recipe.title}</Text>
-            {favouritesFeature && <FavouriteButton recipe={recipe} />}
-          </View>
-          <ValorationStars valoration={recipe.valoration} size="18" />
-          <PreparationTime
-            preparationTimeInMins={recipe.preparationTimeInMins}
-          />
-          <View style={styles.descriptionContainer}>
-            <Text style={styles.description}>{recipe.description}</Text>
-          </View>
-          <View style={styles.userContainer}>
-            <Text style={styles.user}>by {recipe.user}</Text>
-          </View>
+    <View style={styles.container}>
+      <Image style={styles.image} source={{ uri: recipe.url }} />
+      <View style={styles.recipeDataContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{recipe.title}</Text>
+        </View>
+        <ValorationStars valoration={recipe.valoration} size="18" />
+        <PreparationTime preparationTimeInMins={recipe.preparationTimeInMins} />
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.description}>{recipe.description}</Text>
+        </View>
+        <View style={styles.userContainer}>
+          <Text style={styles.user}>by {recipe.user}</Text>
         </View>
       </View>
-    </TouchableWithoutFeedback>
+    </View>
   );
 };
 

@@ -2,14 +2,10 @@ import React from "react";
 import { View } from "react-native";
 import RecipeDetail from "../components/RecipeDetail";
 
-const RecipeDetailScreen = ({ recipe, setSelectedRecipe }) => {
+const RecipeDetailScreen = ({ route }) => {
   return (
-    <View
-      style={{
-        paddingTop: "15%",
-      }}
-    >
-      <RecipeDetail recipe={recipe} setSelectRecipe={setSelectedRecipe} />
+    <View>
+      <RecipeDetail recipe={route.params.recipe} />
     </View>
   );
 };

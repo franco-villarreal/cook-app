@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TouchableOpacity,
   Image,
@@ -8,19 +8,25 @@ import {
   Platform,
 } from "react-native";
 
-const FavouriteButton = ({ recipe, size = "28", black = true }) => {
+const FavouriteButton = ({
+  recipe,
+  size = "28",
+  black = true,
+  favourite = false,
+}) => {
   const isFavouriteIconSrc = black
     ? require("../icons/filled_heart_black.png")
     : require("../icons/filled_heart_white.png");
   const isNotFavouriteIconSrc = black
     ? require("../icons/heart_black.png")
     : require("../icons/heart_white.png");
-  const [isFavourite, setIsFavourite] = useState(false);
+  const [isFavourite, setIsFavourite] = useState(favourite);
   const [favouriteIconType, setFavouriteIconType] = useState(
-    isNotFavouriteIconSrc
+    isFavourite ? isFavouriteIconSrc : isNotFavouriteIconSrc
   );
 
   const handleFavourites = () => {
+    console.log(`isFavourite is: ${isFavourite}`);
     setIsFavourite(isFavourite ? false : true);
     setFavouriteIconType(
       isFavourite ? isFavouriteIconSrc : isNotFavouriteIconSrc
@@ -54,12 +60,7 @@ const FavouriteButton = ({ recipe, size = "28", black = true }) => {
 };
 
 const styles = StyleSheet.create({
-  favouriteToucheable: {
-    paddingHorizontal: 10,
-    flex: 1,
-    zIndex: 1,
-    alignItems: "flex-end",
-  },
+  favouriteToucheable: {},
 });
 
 export default FavouriteButton;
