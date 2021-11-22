@@ -7,7 +7,8 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View
       style={{
-        padding: 10,
+        paddingTop: 10,
+        paddingHorizontal: 10,
       }}
     >
       <Recipes recipes={recipes} navigation={navigation} />

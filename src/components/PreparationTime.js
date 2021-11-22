@@ -1,18 +1,20 @@
 import React from "react";
 import { Image, View, Text, StyleSheet } from "react-native";
 
-const clockIconSrc = require("../icons/clock_black.png");
+const clockIconSrc = require("../icons/wall_clock.png");
 
-const PreparationTime = ({
-  preparationTimeInMins,
-  size = "18",
-  direction = "row",
-}) => {
+const PreparationTime = ({ preparationTimeInMins, size = "28" }) => {
   return (
     <View
       style={{
         ...styles.preparationTimeContainer,
-        ...{ flexDirection: direction },
+        ...{
+          marginBottom: -size - 5,
+          padding: 5,
+          backgroundColor: "rgba(255,255,255,0.5)",
+          borderRadius: 10,
+          width: Number(size) + 20,
+        },
       }}
     >
       <Image
@@ -25,10 +27,10 @@ const PreparationTime = ({
       <Text
         style={{
           ...styles.preparationTimeInMins,
-          ...{ fontSize: Number(size) - 4 },
+          ...{ fontSize: Number(size) / 1.8 },
         }}
       >
-        {preparationTimeInMins} min
+        {preparationTimeInMins}'
       </Text>
     </View>
   );
@@ -36,13 +38,20 @@ const PreparationTime = ({
 
 const styles = StyleSheet.create({
   preparationTimeContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
+    marginHorizontal: 5,
+    margin: 5,
   },
   preparationTimeInMins: {
     marginHorizontal: 5,
+    fontFamily: "Roboto-Medium",
+    color: "red",
+    zIndex: 2,
   },
-  clockIcon: {},
+  clockIcon: {
+    zIndex: 1,
+  },
 });
 
 export default PreparationTime;

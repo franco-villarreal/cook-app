@@ -1,29 +1,38 @@
 import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 const starIconSrc = require("../icons/star.png");
 
-const ValorationStars = ({ valoration, size = "20", direction = "row" }) => {
-  const stars = [];
-  for (let i = 0; i < valoration; i++) {
-    stars.push(
+const ValorationStars = ({ valoration, size = "28" }) => {
+  return (
+    <View
+      style={{
+        ...styles.valorationStarsContainer,
+        ...{
+          marginBottom: -size - 5,
+          padding: 5,
+          backgroundColor: "rgba(255,255,255,0.5)",
+          borderRadius: 10,
+          width: Number(size) + 18,
+        },
+      }}
+    >
       <Image
-        key={i}
         style={{
           ...styles.starIcon,
           ...{ width: Number(size), height: Number(size) },
         }}
         source={starIconSrc}
       ></Image>
-    );
-  }
-  return (
-    <View
-      style={{
-        ...styles.valorationStarsContainer,
-        ...{ flexDirection: direction },
-      }}
-    >
-      {stars}
+      <Text
+        style={{
+          zIndex: 2,
+          fontSize: Number(size) / 1.8,
+          fontFamily: "Roboto-Medium",
+          color: "green",
+        }}
+      >
+        {valoration.toFixed(1)}
+      </Text>
     </View>
   );
 };
@@ -31,8 +40,13 @@ const ValorationStars = ({ valoration, size = "20", direction = "row" }) => {
 const styles = StyleSheet.create({
   valorationStarsContainer: {
     marginVertical: 5,
-    flexDirection: "row",
+    marginHorizontal: 5,
+    flexDirection: "column",
+    alignItems: "center",
+    alignContent: "center",
   },
-  starIcon: {},
+  starIcon: {
+    zIndex: 1,
+  },
 });
 export default ValorationStars;

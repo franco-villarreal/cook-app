@@ -1,9 +1,17 @@
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import ValorationStars from "./ValorationStars";
-import PreparationTime from "./PreparationTime";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Device, CommonStyles } from "../constants";
+import ImageWithGradient from "./ImageWithGradient";
 
 const RecipeDetail = ({ recipe }) => {
+  const ingredients = [];
+  for (let i = 0; i < recipe.ingredients.length; i++) {
+    ingredients.push(
+      <Text key={i} style={CommonStyles.textStyle}>
+        - {recipe.ingredients[i]}
+      </Text>
+    );
+  }
   return (
     <View>
       <ScrollView style={styles.container}>
@@ -13,31 +21,26 @@ const RecipeDetail = ({ recipe }) => {
             alignItems: "center",
           }}
         ></View>
-        <Image style={styles.image} source={{ uri: recipe.url }}></Image>
+        <ImageWithGradient
+          recipe={recipe}
+          imageStyles={styles.image}
+          containerStyle={{ marginBottom: 25 }}
+        />
         <View style={styles.recipeDataContainer}>
-          <PreparationTime
-            preparationTimeInMins={recipe.preparationTimeInMins}
-            size="25"
-            direction="row-reverse"
-          />
-          <ValorationStars
-            valoration={recipe.valoration}
-            size="25"
-            direction="row-reverse"
-          />
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{recipe.title}</Text>
+            <Text style={CommonStyles.titleStyles}>{recipe.title}</Text>
           </View>
           <View style={styles.descriptionContainer}>
-            <Text style={styles.description}>{recipe.description}</Text>
+            <Text style={CommonStyles.textStyle}>{recipe.description}</Text>
+          </View>
+
+          <View>
+            <Text style={CommonStyles.subTitleStyles}>Ingredients</Text>
+            {ingredients}
           </View>
           <View>
-            <Text>Ingredients</Text>
-            <Text>{recipe.ingredients}</Text>
-          </View>
-          <View>
-            <Text>Preparation</Text>
-            <Text>{recipe.preparation}</Text>
+            <Text style={CommonStyles.subTitleStyles}>Preparation</Text>
+            <Text style={CommonStyles.textStyle}>{recipe.preparation}</Text>
           </View>
         </View>
       </ScrollView>
@@ -47,13 +50,11 @@ const RecipeDetail = ({ recipe }) => {
 
 const styles = StyleSheet.create({
   container: {
-    borderTopRightRadius: 100,
-    borderTopLeftRadius: 100,
+    backgroundColor: "white",
   },
   image: {
-    height: 600,
+    height: Device.windowHeight / 1.5,
     width: "100%",
-    marginTop: -50,
   },
   recipeDataContainer: {
     marginHorizontal: 10,
@@ -61,6 +62,9 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     marginTop: 5,
+    flexDirection: "row",
+    alignItems: "flex-start",
+    alignContent: "center",
   },
   descriptionContainer: {
     marginTop: 5,

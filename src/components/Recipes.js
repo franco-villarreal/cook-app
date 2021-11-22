@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  FlatList,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  TouchableHighlight,
-} from "react-native";
+import { View, FlatList, TouchableWithoutFeedback } from "react-native";
 import RecipeCard from "./RecipeCard";
 
 const Recipes = ({ recipes, navigation }) => {

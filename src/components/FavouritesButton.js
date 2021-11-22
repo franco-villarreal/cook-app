@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   TouchableOpacity,
   Image,
@@ -10,7 +10,7 @@ import {
 
 const FavouriteButton = ({
   recipe,
-  size = "28",
+  size = "26",
   black = true,
   favourite = false,
 }) => {

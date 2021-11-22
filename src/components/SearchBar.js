@@ -1,7 +1,8 @@
 import React from "react";
 import { Image, StyleSheet, TextInput, View } from "react-native";
+import { Colors } from "../constants";
 
-const searchIconSrc = require("../icons/search_white.png");
+const searchIconSrc = require("../icons/search_black.png");
 
 const SearchBar = () => {
   return (
@@ -9,9 +10,9 @@ const SearchBar = () => {
       <Image style={styles.searchIcon} source={searchIconSrc}></Image>
       <TextInput
         style={styles.searchInput}
-        maxLength={25}
+        maxLength={30}
         placeholder="Search"
-        placeholderTextColor="#FFF"
+        placeholderTextColor={Colors.secondaryText}
       ></TextInput>
     </View>
   );
@@ -20,9 +21,9 @@ const SearchBar = () => {
 const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: "row",
-    width: "96%",
     alignItems: "center",
-    marginLeft: 40,
+    flex: 1,
+    padding: 5,
   },
   searchIcon: {
     width: 20,
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     fontFamily: "Roboto",
     fontSize: 18,
-    color: "#FFF",
+    color: Colors.primaryText,
     alignContent: "center",
   },
 });

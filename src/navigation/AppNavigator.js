@@ -4,10 +4,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "../screens/HomeScreen";
 import RecipeDetailScreen from "../screens/RecipeDetailScreen";
-import Colors from "../constants/colors";
+import SignInScreen from "../screens/SignInScreen";
+import SignUpScreen from "../screens/SignUpScreen";
 import SearchBar from "../components/SearchBar";
 import FavouriteButton from "../components/FavouritesButton";
 import User from "../../user";
+import { Colors } from "../constants";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,23 +19,36 @@ const AppNavigator = () => {
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: Colors.primary,
+            backgroundColor: Colors.light,
           },
-          headerTintColor: "#FFF",
+          headerTintColor: Colors.title,
         }}
       >
         <Stack.Screen
-          options={{ headerLeft: () => <SearchBar /> }}
+          options={{
+            headerShown: false,
+          }}
+          name="SignIn"
+          component={SignInScreen}
+        ></Stack.Screen>
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="SignUp"
+          component={SignUpScreen}
+        ></Stack.Screen>
+        <Stack.Screen
+          options={{ headerLeft: () => <SearchBar />, title: "" }}
           name="Home"
           component={HomeScreen}
         ></Stack.Screen>
         <Stack.Screen
           options={({ route }) => ({
-            title: route.params.recipe.title,
+            title: "",
             headerRight: () => (
               <FavouriteButton
                 recipe={route.params.recipe}
-                black={false}
                 favourite={() => {
                   return User.favourites.includes(route.params.recipe.id);
                 }}
