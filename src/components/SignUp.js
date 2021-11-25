@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Text } from "react-native";
-import { BigButton } from "./commons";
+import { BigButton, CommonTextInput, SecureTextInput } from "./commons";
 import { CommonStyles, Device } from "../constants";
 
 export const SignUp = ({ navigation }) => {
+  const [nameInput, setNameInput] = useState("");
+  const [lastnameInput, setLastnameInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+  const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
+
+  const handleNameInputChange = (name) => setNameInput(name);
+  const handleLastnameInputChange = (lastname) => setLastnameInput(lastname);
+  const handleEmailInputChange = (email) => setEmailInput(email);
+  const handlePasswordInputChange = (password) => setPasswordInput(password);
+  const handleConfirmPasswordInputChange = (confirmPassword) =>
+    setConfirmPasswordInput(confirmPassword);
+
   const handleSignUp = () => {
-    console.log("Signing up...");
+    const payload = {
+      name: nameInput,
+      lastname: lastnameInput,
+      email: emailInput,
+      password: passwordInput,
+    };
+    console.log(`Signing up with ${JSON.stringify(payload)}`);
     navigation.navigate("SignIn");
   };
   const handleSignIn = () => {
@@ -18,36 +37,26 @@ export const SignUp = ({ navigation }) => {
         <Text style={CommonStyles.titleStyles}>Let's sign up!</Text>
       </View>
       <View style={styles.inputsContainer}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Name"
-            style={CommonStyles.textInputStyle}
-          ></TextInput>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Lastname"
-            style={CommonStyles.textInputStyle}
-          ></TextInput>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Email"
-            style={CommonStyles.textInputStyle}
-          ></TextInput>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Password"
-            style={CommonStyles.textInputStyle}
-          ></TextInput>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Confirm"
-            style={CommonStyles.textInputStyle}
-          ></TextInput>
-        </View>
+        <CommonTextInput
+          placeholder="Name"
+          onChangeText={handleNameInputChange}
+        />
+        <CommonTextInput
+          placeholder="Lastname"
+          onChangeText={handleLastnameInputChange}
+        />
+        <CommonTextInput
+          placeholder="Email"
+          onChangeText={handleEmailInputChange}
+        />
+        <SecureTextInput
+          placeholder="Password"
+          onChangeText={handlePasswordInputChange}
+        />
+        <SecureTextInput
+          placeholder="Confirm password"
+          onChangeText={handleConfirmPasswordInputChange}
+        />
       </View>
 
       <View style={styles.buttonsContainer}>
@@ -64,7 +73,7 @@ export const SignUp = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: Device.screenHeight,
+    height: Device.windowHeight,
     marginTop: 30,
     flexDirection: "column",
   },

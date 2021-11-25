@@ -12,6 +12,7 @@ export const SignIn = ({ navigation }) => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalText, setModalText] = useState({});
 
   const handleEmailInputChange = (email) => setEmailInput(email);
   const handlePasswordInputChange = (password) => setPasswordInput(password);
@@ -20,9 +21,19 @@ export const SignIn = ({ navigation }) => {
     console.log("Signing in...");
     if (!emailInput) {
       console.log("ERROR");
+      setModalText({
+        title: "Error",
+        text: "Email cannot be empty!",
+        confirm: "Retry",
+      });
       setModalVisible(true);
     } else if (!passwordInput) {
       console.log("ERROR");
+      setModalText({
+        title: "Error",
+        text: "Password cannot be empty!",
+        confirm: "Retry",
+      });
       setModalVisible(true);
     } else {
       navigation.navigate("Home");
@@ -35,6 +46,7 @@ export const SignIn = ({ navigation }) => {
       <View style={styles.titleContainer}>
         <Text style={CommonStyles.titleStyles}>Welcome!</Text>
       </View>
+
       <View style={styles.inputsContainer}>
         <CommonTextInput
           placeholder="Email"
@@ -55,6 +67,7 @@ export const SignIn = ({ navigation }) => {
       </View>
 
       <CustomModal
+        texts={modalText}
         visibility={modalVisible}
         setModalVisible={setModalVisible}
       />
@@ -64,7 +77,7 @@ export const SignIn = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: Device.screenHeight,
+    height: Device.windowHeight,
     marginTop: 30,
     flexDirection: "column",
   },

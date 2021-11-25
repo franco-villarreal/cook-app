@@ -6,6 +6,7 @@ const user = {
   id: getNewUniqueId(),
   name: "Franco",
   lastName: "Villarreal",
+  email: "francovillarreal@gmail.com",
   favourites: ["2", "8"],
 };
 

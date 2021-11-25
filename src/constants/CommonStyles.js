@@ -1,23 +1,26 @@
-import { Colors } from "./";
+import { Colors } from "./Colors";
 
 export const CommonStyles = {
   titleStyles: {
-    fontFamily: "Roboto-Bold",
+    fontFamily: "Roboto-Regular",
     fontSize: 36,
     color: Colors.title,
     marginBottom: 10,
   },
   subTitleStyles: {
-    fontFamily: "Roboto-Medium",
+    padding: 10,
+    backgroundColor: Colors.complementary,
+    borderRadius: 10,
+    fontFamily: "Roboto-Regular",
     fontSize: 24,
     color: Colors.title,
-    marginBottom: 10,
+    marginBottom: 20,
   },
   textStyle: {
     fontFamily: "Roboto-Regular",
     fontSize: 18,
     color: Colors.primaryText,
-    marginBottom: 10,
+    marginBottom: 20,
   },
   textInputStyle: {
     padding: 5,

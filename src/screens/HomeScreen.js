@@ -1,9 +1,10 @@
 import React from "react";
 import { View } from "react-native";
 import Recipes from "../components/Recipes";
-import recipes from "../../recipes";
+import { useSelector } from "react-redux";
 
-const HomeScreen = ({ navigation }) => {
+export const HomeScreen = ({ navigation }) => {
+  const recipes = useSelector((state) => state.recipes.recipes);
   return (
     <View
       style={{

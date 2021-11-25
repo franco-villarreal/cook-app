@@ -1,9 +1,9 @@
 import React from "react";
 import { View } from "react-native";
-import { Colors } from "../constants";
-import SignIn from "../components/SignIn";
+import Profile from "../components/Profile";
+import { Colors } from "../constants/Colors";
 
-export const SignInScreen = ({ navigation }) => {
+export const ProfileScreen = ({ navigation }) => {
   return (
     <View
       style={{
@@ -12,9 +12,9 @@ export const SignInScreen = ({ navigation }) => {
         backgroundColor: Colors.light,
       }}
     >
-      <SignIn navigation={navigation}></SignIn>
+      <Profile navigation={navigation}></Profile>
     </View>
   );
 };
 
-export default SignInScreen;
+export default ProfileScreen;

@@ -15,9 +15,16 @@ export const ImageWithGradient = ({
       <LinearGradient
         colors={[
           "transparent",
+          "rgba(255,255,255,0.1)",
           "rgba(255,255,255,0.2)",
+          "rgba(255,255,255,0.3)",
           "rgba(255,255,255,0.4)",
+          "rgba(255,255,255,0.5)",
+          "rgba(255,255,255,0.6)",
           "rgba(255,255,255,0.7)",
+          "rgba(255,255,255,0.8)",
+          "rgba(255,255,255,0.9)",
+          "rgba(255,255,255,1)",
           "rgba(255,255,255,1)",
         ]}
         style={{ height: 50, marginTop: -50 }}

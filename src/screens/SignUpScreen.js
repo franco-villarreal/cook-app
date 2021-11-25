@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Colors } from "../constants";
 import SignUp from "../components/SignUp";
 
-const SignUpScreen = ({ navigation }) => {
+export const SignUpScreen = ({ navigation }) => {
   return (
     <View
       style={{
