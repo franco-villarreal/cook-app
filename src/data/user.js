@@ -7,7 +7,7 @@ const user = {
   name: "Franco",
   lastName: "Villarreal",
   email: "francovillarreal@gmail.com",
-  favourites: ["2", "8"],
+  favourites: ["2", "8", "5"],
 };
 
 export default user;

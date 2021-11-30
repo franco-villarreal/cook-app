@@ -24,16 +24,9 @@ export const FavouritesNavigator = () => {
         component={FavouritesScreen}
       ></FavouritesStack.Screen>
       <FavouritesStack.Screen
-        options={({ route }) => ({
+        options={() => ({
           title: "",
-          headerRight: () => (
-            <FavouriteButton
-              recipe={route.params.recipe}
-              favourite={() => {
-                return true;
-              }}
-            />
-          ),
+          headerRight: () => <FavouriteButton />,
         })}
         name="RecipeDetail"
         component={RecipeDetailScreen}

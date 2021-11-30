@@ -1,9 +1,15 @@
 import React from "react";
 import { View } from "react-native";
+import { useSelector } from "react-redux";
 import Recipes from "../components/Recipes";
-import favouritesRecipes from "../data/favouritesRecipes";
 
 export const FavouritesScreen = ({ navigation }) => {
+  const favouritesRecipes = useSelector((state) =>
+    state.recipes.recipes.filter((recipe) =>
+      state.user.favourites.includes(recipe.id)
+    )
+  );
+
   return (
     <View
       style={{

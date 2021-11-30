@@ -4,7 +4,7 @@ import Recipes from "../components/Recipes";
 import { useSelector } from "react-redux";
 
 export const HomeScreen = ({ navigation }) => {
-  const recipes = useSelector((state) => state.recipes.recipes);
+  const recipes = useSelector((state) => state.recipes.filteredRecipes);
   return (
     <View
       style={{

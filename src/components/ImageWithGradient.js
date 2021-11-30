@@ -26,6 +26,7 @@ export const ImageWithGradient = ({
           "rgba(255,255,255,0.9)",
           "rgba(255,255,255,1)",
           "rgba(255,255,255,1)",
+          "rgba(255,255,255,1)",
         ]}
         style={{ height: 50, marginTop: -50 }}
       ></LinearGradient>
