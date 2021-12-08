@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import Recipes from "../components/Recipes";
 
 export const FavouritesScreen = ({ navigation }) => {
-  const favouritesRecipes = useSelector((state) =>
-    state.recipes.recipes.filter((recipe) => {
-      state.user.favourites.includes(recipe.id);
-    })
+  const recipes = useSelector((state) => state.recipes.recipes);
+  const userFavourites = useSelector((state) => state.user.favourites);
+  const favouritesRecipes = recipes.filter((recipe) =>
+    userFavourites.includes(recipe.id)
   );
 
   return (
