@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeScreen, RecipeDetailScreen } from "../screens";
+import { CreateRecipeScreen, HomeScreen, RecipeDetailScreen } from "../screens";
 import SearchBar from "../components/SearchBar";
 import FavouriteButton from "../components/FavouritesButton";
 import { Colors } from "../constants";
@@ -29,6 +29,13 @@ export const HomeNavigator = () => {
         })}
         name="RecipeDetail"
         component={RecipeDetailScreen}
+      ></HomeStack.Screen>
+      <HomeStack.Screen
+        options={() => ({
+          title: "",
+        })}
+        name="CreateRecipe"
+        component={CreateRecipeScreen}
       ></HomeStack.Screen>
     </HomeStack.Navigator>
   );

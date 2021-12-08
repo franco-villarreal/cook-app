@@ -4,3 +4,4 @@ export * from "./RecipeDetailScreen";
 export * from "./SignInScreen";
 export * from "./SignUpScreen";
 export * from "./ProfileScreen";
+export * from "./CreateRecipeScreen";

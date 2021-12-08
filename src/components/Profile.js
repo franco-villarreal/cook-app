@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Colors } from "../constants";
-import { AddRecipe } from "./AddRecipe";
 import { useSelector } from "react-redux";
 
 const Profile = () => {
@@ -9,8 +8,7 @@ const Profile = () => {
   return (
     <View style={styles.container}>
       <View>
-        <Text>{user.userId}</Text>
-        <AddRecipe />
+        <Text>{user.name}</Text>
       </View>
     </View>
   );

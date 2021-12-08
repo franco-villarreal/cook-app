@@ -2,6 +2,7 @@ import React from "react";
 import { View, FlatList, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { selectRecipe } from "../store/actions/recipes.actions";
+import PlusButton from "./commons/PlusButton";
 import RecipeCard from "./RecipeCard";
 
 const Recipes = ({ recipes, navigation }) => {
@@ -9,6 +10,9 @@ const Recipes = ({ recipes, navigation }) => {
   const handleCardTouch = (item) => {
     dispatch(selectRecipe(item));
     navigation.navigate("RecipeDetail", { recipe: item });
+  };
+  const handlePlusButton = () => {
+    navigation.navigate("CreateRecipe");
   };
   return (
     <View>
@@ -26,6 +30,7 @@ const Recipes = ({ recipes, navigation }) => {
           </TouchableWithoutFeedback>
         )}
       />
+      <PlusButton onPress={handlePlusButton} />
     </View>
   );
 };
