@@ -1,31 +1,27 @@
-import user from "../../data/user";
-import {
-  SIGN_IN,
-  ADD_FAVOURITE,
-  REMOVE_FAVOURITE,
-} from "../actions/user.actions";
+import { SIGN_IN, SIGN_UP, UPDATE_FAVOURITES } from "../actions/user.actions";
 
-const initialState = user;
+const initialState = {};
+
+const initialValuesForUser = {
+  favourites: [],
+};
 
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
     case SIGN_IN:
       return {
         ...state,
-        ...action.user,
+        ...{ ...initialValuesForUser, ...action.user },
       };
-    case ADD_FAVOURITE:
-      const favourites = state.favourites;
-      favourites.push(action.recipeId);
-      console.log(favourites);
+    case SIGN_UP:
       return {
         ...state,
-        favourites,
+        ...{ ...initialValuesForUser, ...action.user },
       };
-    case REMOVE_FAVOURITE:
+    case UPDATE_FAVOURITES:
       return {
         ...state,
-        favourites: state.favourites.filter((id) => id !== action.recipeId),
+        ...{ ...initialValuesForUser, ...action.user },
       };
     default:
       return state;

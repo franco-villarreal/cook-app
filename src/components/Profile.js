@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import User from "../data/user";
 import { Colors } from "../constants";
+import { AddRecipe } from "./AddRecipe";
+import { useSelector } from "react-redux";
 
-const Profile = ({ navigation }) => {
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    const actualUser = User;
-    setUser(actualUser);
-  });
+const Profile = () => {
+  const user = useSelector((state) => state.user);
   return (
     <View style={styles.container}>
       <View>
-        <Text>{user.name}</Text>
+        <Text>{user.userId}</Text>
+        <AddRecipe />
       </View>
     </View>
   );
@@ -21,6 +19,7 @@ const Profile = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.light,
+    height: "100%",
   },
 });
 export default Profile;

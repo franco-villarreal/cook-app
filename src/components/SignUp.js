@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Text } from "react-native";
 import { BigButton, CommonTextInput, SecureTextInput } from "./commons";
 import { CommonStyles, Device } from "../constants";
+import { useDispatch } from "react-redux";
+import { signUp } from "../store/actions/user.actions";
 
 export const SignUp = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [nameInput, setNameInput] = useState("");
   const [lastnameInput, setLastnameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
@@ -18,14 +21,17 @@ export const SignUp = ({ navigation }) => {
     setConfirmPasswordInput(confirmPassword);
 
   const handleSignUp = () => {
-    const payload = {
-      name: nameInput,
-      lastname: lastnameInput,
-      email: emailInput,
-      password: passwordInput,
-    };
-    console.log(`Signing up with ${JSON.stringify(payload)}`);
-    navigation.navigate("SignIn");
+    if (passwordInput === confirmPasswordInput) {
+      const payload = {
+        name: nameInput,
+        lastname: lastnameInput,
+        email: emailInput,
+        password: passwordInput,
+      };
+      dispatch(signUp(payload));
+    } else {
+      console.log(`Passwords does not match!`);
+    }
   };
   const handleSignIn = () => {
     console.log("Navigate to Sign In Screen");

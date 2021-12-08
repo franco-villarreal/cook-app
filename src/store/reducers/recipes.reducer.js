@@ -1,5 +1,9 @@
 import recipes from "../../data/recipes";
-import { SELECT_RECIPE } from "../actions/recipes.actions";
+import {
+  ADD_RECIPE,
+  REMOVE_RECIPE,
+  SELECT_RECIPE,
+} from "../actions/recipes.actions";
 
 const initialState = {
   recipes,
@@ -13,6 +17,18 @@ const RecipesReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedRecipe: action.recipe,
+      };
+    case ADD_RECIPE:
+      const updatedRecipes = state.recipes;
+      updatedRecipes.push(action.recipe);
+      return {
+        ...state,
+        recipes: updatedRecipes,
+      };
+    case REMOVE_RECIPE:
+      return {
+        ...state,
+        recipes: recipes.push(action.recipe),
       };
     default:
       return state;

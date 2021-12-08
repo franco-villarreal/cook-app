@@ -8,11 +8,11 @@ import {
   Platform,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { addFavourite, removeFavourite } from "../store/actions/user.actions";
+import { updateFavourites } from "../store/actions/user.actions";
 
 const FavouriteButton = ({ size = "26", black = true }) => {
+  const user = useSelector((state) => state.user);
   const recipe = useSelector((state) => state.recipes.selectedRecipe);
-  console.log(useSelector((state) => state.user));
   const favourite = useSelector((state) =>
     state.user.favourites.includes(recipe.id)
   );
@@ -28,12 +28,21 @@ const FavouriteButton = ({ size = "26", black = true }) => {
   );
 
   const handleFavourites = () => {
+    const favourites = [...user.favourites];
     if (!favourite) {
-      dispatch(addFavourite(recipe.id));
+      const payload = {
+        userId: user.userId,
+        favourites: [...favourites, recipe.id],
+      };
+      dispatch(updateFavourites(payload));
       setFavouriteIconType(isFavouriteIconSrc);
       notify(true);
     } else {
-      dispatch(removeFavourite(recipe.id));
+      const payload = {
+        userId: user.userId,
+        favourites: [...favourites.filter((id) => id !== recipe.id)],
+      };
+      dispatch(updateFavourites(payload));
       setFavouriteIconType(isNotFavouriteIconSrc);
       notify(false);
     }

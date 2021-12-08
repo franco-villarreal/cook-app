@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, KeyboardAvoidingView } from "react-native";
 import {
   BigButton,
   CommonTextInput,
@@ -7,8 +7,11 @@ import {
   CustomModal,
 } from "./commons";
 import { Device, CommonStyles } from "../constants";
+import { useDispatch } from "react-redux";
+import { signIn } from "../store/actions/user.actions";
 
 export const SignIn = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
@@ -18,7 +21,6 @@ export const SignIn = ({ navigation }) => {
   const handlePasswordInputChange = (password) => setPasswordInput(password);
 
   const handleSignIn = () => {
-    console.log("Signing in...");
     if (!emailInput) {
       console.log("ERROR");
       setModalText({
@@ -36,7 +38,12 @@ export const SignIn = ({ navigation }) => {
       });
       setModalVisible(true);
     } else {
-      navigation.navigate("Home");
+      dispatch(
+        signIn({
+          email: emailInput,
+          password: passwordInput,
+        })
+      );
     }
   };
   const handleSignUp = () => navigation.navigate("SignUp");
