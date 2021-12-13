@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, Button, Image, Alert, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { BigButton } from "./commons";
+import ImageWithGradient from "./ImageWithGradient";
 
-export const ImageSelectorC = (props) => {
+export const ImageSelector = (props) => {
   const [pickedUri, setPickedUri] = useState(null);
   const verifyPermissions = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -20,7 +22,7 @@ export const ImageSelectorC = (props) => {
     if (!isCameraOk) return;
 
     const image = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
+      allowsEditing: false,
       aspect: [16, 9],
       quality: 0.8,
     });
@@ -29,19 +31,42 @@ export const ImageSelectorC = (props) => {
   };
   return (
     <View>
-      <View>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          marginVertical: 10,
+        }}
+      >
         {pickedUri ? (
           <Image
             source={{ uri: pickedUri }}
-            style={{ width: "100%", height: "30%" }}
+            style={{ width: "80%", height: 200, borderRadius: 10 }}
           ></Image>
         ) : (
-          <Text>No photo</Text>
+          <View
+            style={{
+              width: "80%",
+              height: 200,
+              borderRadius: 10,
+              borderColor: "gray",
+              alignItems: "center",
+              alignContent: "center",
+              justifyContent: "center",
+              backgroundColor: "#e3e3e3",
+            }}
+          >
+            <Text style={{ fontSize: 18 }}>No image selected</Text>
+          </View>
         )}
       </View>
-      <Button title="Tomar foto" onPress={handleTakePhoto}></Button>
+      <BigButton
+        text="Upload image"
+        type="secondary"
+        onPress={handleTakePhoto}
+      />
     </View>
   );
 };
 
-export default ImageSelectorC;
+export default ImageSelector;

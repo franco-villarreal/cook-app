@@ -5,14 +5,24 @@ import { CommonStyles } from "../../constants";
 //TODO: mappear el keyboardType y el value
 //TODO: mejorar el componente genérico con expresiones regulares ver guia clase 14
 
-export const CommonTextInput = ({ placeholder = "", value, onChangeText }) => {
+export const CommonTextInput = ({
+  placeholder = "",
+  value,
+  multiline = false,
+  keyboardType = "default",
+  customStyles = {},
+  customTextStyles = {},
+  onChangeText,
+}) => {
   return (
-    <View style={styles.inputContainer}>
+    <View style={{ ...styles.inputContainer, ...customStyles }}>
       <TextInput
         placeholder={placeholder}
+        multiline={multiline}
+        keyboardType={keyboardType}
         onChangeText={onChangeText}
         value={value}
-        style={CommonStyles.textInputStyle}
+        style={{ ...CommonStyles.textInputStyle, ...customTextStyles }}
       ></TextInput>
     </View>
   );

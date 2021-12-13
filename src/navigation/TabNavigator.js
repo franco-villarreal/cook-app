@@ -13,10 +13,14 @@ const BottomTabs = createBottomTabNavigator();
 export const TabNavigator = () => {
   return (
     <BottomTabs.Navigator
+      tabBarOptions={{
+        keyboardHidesTabBar: true,
+      }}
       screenOptions={{
         headerShown: false,
         tabBarStyle: styles.tabBar,
         tabBarShowLabel: false,
+        keyboardHidesTabBar: true,
       }}
     >
       <BottomTabs.Screen
