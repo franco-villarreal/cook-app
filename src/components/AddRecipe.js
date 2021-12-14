@@ -16,7 +16,7 @@ import { BigButton, CommonTextInput } from "./commons";
 import ImageSelector from "./ImageSelector";
 import { CommonStyles, Tags } from "../constants";
 
-export const AddRecipe = () => {
+export const AddRecipe = ({ navigation }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [titleInput, setTitleInput] = useState("");
@@ -97,6 +97,7 @@ export const AddRecipe = () => {
       console.log(`${titleInput} added!`);
       dispatch(addRecipe(newRecipe));
       console.log(newRecipe);
+      navigation.navigate("Home");
     }
   };
 
