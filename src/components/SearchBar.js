@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     marginLeft: 30,
-    fontFamily: "Roboto",
+    fontFamily: "Roboto-Regular",
     fontSize: 18,
     color: Colors.primaryText,
     alignContent: "center",

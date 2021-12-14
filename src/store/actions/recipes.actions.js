@@ -1,7 +1,9 @@
-import { FIRESTORE_URL } from "../../constants/Firebase";
+import RecipesService from "../../services/RecipesService";
 export const SELECT_RECIPE = "SELECT_RECIPE";
 export const ADD_RECIPE = "ADD_RECIPE";
-export const REMOVE_RECIPE = "REMOVE_RECIPE";
+export const GET_RECIPES = "GET_RECIPES";
+
+const recipesService = new RecipesService();
 
 export const selectRecipe = (recipe) => ({
   type: SELECT_RECIPE,
@@ -11,28 +13,29 @@ export const selectRecipe = (recipe) => ({
 export const addRecipe = (recipe) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${FIREBASE_URL}/recipes.json`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(recipe),
-      });
-
-      const result = await response.json();
-      console.log(result);
+      const recipes = await recipesService.saveRecipe(recipe);
 
       dispatch({
         type: ADD_RECIPE,
-        recipe,
+        recipes,
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 };
 
-export const removeRecipe = (recipe) => ({
-  type: REMOVE_RECIPE,
-  recipe,
-});
+export const getRecipes = () => {
+  return async (dispatch) => {
+    try {
+      const recipes = await recipesService.getRecipes();
+
+      dispatch({
+        type: GET_RECIPES,
+        recipes,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingLeft: 10,
     color: "#000000",
-    fontFamily: "Roboto",
+    fontFamily: "Roboto-Regular",
     fontSize: 24,
   },
   titleContainer: {

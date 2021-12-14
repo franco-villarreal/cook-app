@@ -1,13 +1,13 @@
 import recipes from "../../data/recipes";
 import {
   ADD_RECIPE,
-  REMOVE_RECIPE,
+  GET_RECIPES,
   SELECT_RECIPE,
 } from "../actions/recipes.actions";
 
 const initialState = {
-  recipes,
-  filteredRecipes: recipes,
+  recipes: [],
+  filteredRecipes: [],
   selectedRecipe: null,
 };
 
@@ -19,16 +19,14 @@ const RecipesReducer = (state = initialState, action) => {
         selectedRecipe: action.recipe,
       };
     case ADD_RECIPE:
-      const updatedRecipes = state.recipes;
-      updatedRecipes.push(action.recipe);
       return {
         ...state,
-        recipes: updatedRecipes,
+        filteredRecipes: action.recipes,
       };
-    case REMOVE_RECIPE:
+    case GET_RECIPES:
       return {
         ...state,
-        recipes: recipes.push(action.recipe),
+        filteredRecipes: action.recipes,
       };
     default:
       return state;

@@ -9,7 +9,7 @@ export const PlusButton = ({ onPress }) => {
       <TouchableOpacity onPress={onPress}>
         <Ionicons
           name="add-circle"
-          size={60}
+          size={80}
           color={Colors.primaryButton.background}
         />
       </TouchableOpacity>
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
     position: "absolute",
-    marginTop: Device.screenHeight / 1.5 - 30,
-    marginLeft: Device.screenWidth / 1.2 - 30,
+    marginTop: Device.screenHeight / 1.5,
+    marginLeft: Device.screenWidth / 1.2 - 40,
   },
 });
 

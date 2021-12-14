@@ -11,7 +11,7 @@ export const CreateRecipeScreen = ({ navigation }) => {
         paddingHorizontal: 10,
       }}
     >
-      <AddRecipe />
+      <AddRecipe navigation={navigation} />
     </View>
   );
 };
