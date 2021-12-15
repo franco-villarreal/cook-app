@@ -1,8 +1,10 @@
 import UsersService from "../../services/UsersService";
+import { getUser, insertUser } from "../../database";
 
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_UP = "SIGN_UP";
 export const UPDATE_FAVOURITES = "UPDATE_FAVOURITES";
+export const REFRESH_USER = "REFRESH_USER";
 
 const usersService = new UsersService();
 
@@ -12,6 +14,10 @@ export const signIn = (payload) => {
       const user = await usersService.signIn(payload);
 
       console.log(`Sign in successfully! ${JSON.stringify(user)}`);
+
+      const result = await insertUser(user);
+
+      console.log(result);
 
       dispatch({
         type: SIGN_IN,
@@ -49,6 +55,30 @@ export const updateFavourites = (payload) => {
 
       dispatch({
         type: UPDATE_FAVOURITES,
+        user,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const refreshUser = () => {
+  return async (dispatch) => {
+    try {
+      let user = {};
+      const data = await getUser();
+
+      if (data.rows._array[0]) {
+        const session = data.rows._array[0];
+        console.log(session);
+        user = await usersService.getUserById(session.userId);
+        user.token = session.token;
+        console.log(user);
+      }
+
+      dispatch({
+        type: REFRESH_USER,
         user,
       });
     } catch (error) {

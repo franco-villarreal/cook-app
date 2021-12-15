@@ -46,7 +46,6 @@ export class RecipesService {
 
     for (let doc in data) {
       recipes.push(data[doc]);
-      console.log(recipes);
     }
 
     return recipes;
@@ -74,8 +73,6 @@ export class RecipesService {
     }
 
     const recipes = await this.getRecipes();
-
-    console.log(recipes);
 
     return recipes;
   }

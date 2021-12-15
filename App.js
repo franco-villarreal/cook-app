@@ -6,6 +6,15 @@ import { StatusBar } from "expo-status-bar";
 import store from "./src/store";
 import { AppNavigator } from "./src/navigation";
 
+import { init } from "./src/database";
+
+init()
+  .then(() => console.log(`Database initialized`))
+  .catch((err) => {
+    console.log("Database error");
+    console.log(err);
+  });
+
 export default function App() {
   const [loaded] = useFonts({
     "Roboto-Regular": require("./assets/fonts/Roboto/Roboto-Regular.ttf"),

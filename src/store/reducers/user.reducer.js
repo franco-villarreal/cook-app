@@ -1,4 +1,9 @@
-import { SIGN_IN, SIGN_UP, UPDATE_FAVOURITES } from "../actions/user.actions";
+import {
+  REFRESH_USER,
+  SIGN_IN,
+  SIGN_UP,
+  UPDATE_FAVOURITES,
+} from "../actions/user.actions";
 
 const initialState = {};
 
@@ -19,6 +24,11 @@ const UserReducer = (state = initialState, action) => {
         ...{ ...initialValuesForUser, ...action.user },
       };
     case UPDATE_FAVOURITES:
+      return {
+        ...state,
+        ...{ ...initialValuesForUser, ...action.user },
+      };
+    case REFRESH_USER:
       return {
         ...state,
         ...{ ...initialValuesForUser, ...action.user },

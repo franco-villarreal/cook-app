@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ToastAndroid,
   AlertIOS,
+  Alert,
   Platform,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
@@ -28,6 +29,7 @@ const FavouriteButton = ({ size = "26", black = true }) => {
   );
 
   const handleFavourites = () => {
+    console.log(user);
     const favourites = [...user.favourites];
     if (!favourite) {
       const payload = {
@@ -55,7 +57,7 @@ const FavouriteButton = ({ size = "26", black = true }) => {
     if (Platform.OS === "android") {
       ToastAndroid.show(msg, ToastAndroid.SHORT);
     } else {
-      AlertIOS.alert(msg);
+      Alert.alert(msg);
     }
   };
 
