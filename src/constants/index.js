@@ -3,3 +3,4 @@ export * from "./CommonStyles";
 export * from "./Device";
 export * from "./Firebase";
 export * from "./Tags";
+export * from "./Cloudinary";

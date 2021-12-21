@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
+import { CLOUDINARY_API_KEY, CLOUDINARY_URL } from "../constants";
 import { addRecipe } from "../store/actions/recipes.actions";
 import { BigButton, CommonTextInput } from "./commons";
 import ImageSelector from "./ImageSelector";
@@ -27,7 +28,7 @@ export const AddRecipe = ({ navigation }) => {
   const [unselectedTags, setUnselectedTags] = useState(Tags);
   const [ingredientInput, setIngredientInput] = useState("");
   const [ingredients, setIngredients] = useState([]);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState({});
 
   const handleTitleChange = (text) => {
     setTitleInput(text);
@@ -72,9 +73,11 @@ export const AddRecipe = ({ navigation }) => {
     }
   };
   const handlePickImage = (image) => {
-    setImage(image);
+    const base64Image = `data:image/jpg;base64,${image.base64}`;
+    setImage({ localUri: image.uri, base64: base64Image });
+    console.log(image);
   };
-  const handleAddRecipe = () => {
+  const handleAddRecipe = async () => {
     if (
       titleInput &&
       descriptionInput &&
@@ -82,6 +85,7 @@ export const AddRecipe = ({ navigation }) => {
       preparationInput &&
       ingredients
     ) {
+      const url = await uploadImage();
       const newRecipe = {
         id: uuidv4(),
         user: user.userId,
@@ -91,13 +95,37 @@ export const AddRecipe = ({ navigation }) => {
         tags: selectedTags,
         ingredients: ingredients,
         preparation: preparationInput,
-        url: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        url,
         valoration: 0,
       };
       console.log(`${titleInput} added!`);
       dispatch(addRecipe(newRecipe));
       console.log(newRecipe);
       navigation.navigate("Home");
+    }
+  };
+
+  const uploadImage = async () => {
+    let payload = {
+      file: image.base64,
+      upload_preset: "ml_default",
+      api_key: parseInt(CLOUDINARY_API_KEY),
+    };
+    try {
+      const response = await fetch(CLOUDINARY_URL, {
+        body: JSON.stringify(payload),
+        headers: {
+          "content-type": "application/json",
+        },
+        method: "POST",
+      });
+
+      let data = await response.json();
+      console.log(data.url);
+
+      return data.url;
+    } catch (error) {
+      console.log(error);
     }
   };
 

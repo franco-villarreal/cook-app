@@ -52,8 +52,6 @@ export class RecipesService {
   }
 
   async saveRecipe(payload) {
-    // TODO: upload image before save recipe
-
     const response = await fetch(`${FIRESTORE_URL}/recipes.json`, {
       method: "POST",
       headers: {

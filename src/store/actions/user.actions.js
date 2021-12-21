@@ -12,6 +12,7 @@ const usersService = new UsersService();
 export const signIn = (payload) => {
   return async (dispatch) => {
     try {
+      signOut();
       const user = await usersService.signIn(payload);
 
       console.log(`Sign in successfully! ${JSON.stringify(user)}`);

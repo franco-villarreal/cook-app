@@ -25,9 +25,10 @@ export const ImageSelector = (props) => {
       allowsEditing: false,
       aspect: [16, 9],
       quality: 0.8,
+      base64: true,
     });
     setPickedUri(image.uri);
-    props.onImage(image.uri);
+    props.onImage(image);
   };
   return (
     <View>

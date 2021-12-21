@@ -4,7 +4,6 @@ import Profile from "../components/Profile";
 import { Colors } from "../constants/Colors";
 
 export const ProfileScreen = ({ navigation }) => {
-  //TODO: add styles and signOut function
   return (
     <View
       style={{
