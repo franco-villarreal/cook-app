@@ -1,6 +1,7 @@
 import {
   REFRESH_USER,
   SIGN_IN,
+  SIGN_OUT,
   SIGN_UP,
   UPDATE_FAVOURITES,
 } from "../actions/user.actions";
@@ -19,6 +20,11 @@ const UserReducer = (state = initialState, action) => {
         ...{ ...initialValuesForUser, ...action.user },
       };
     case SIGN_UP:
+      return {
+        ...state,
+        ...{ ...initialValuesForUser, ...action.user },
+      };
+    case SIGN_OUT:
       return {
         ...state,
         ...{ ...initialValuesForUser, ...action.user },

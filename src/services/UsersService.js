@@ -1,4 +1,5 @@
 import { FIRESTORE_URL, SIGN_IN_URL, SIGN_UP_URL } from "../constants/Firebase";
+import { deleteUser } from "../database";
 
 export class UsersService {
   constructor() {}
@@ -64,6 +65,10 @@ export class UsersService {
       ...newUser,
       token: data.idToken,
     };
+  }
+
+  async signOut() {
+    await deleteUser();
   }
 
   async getUserById(id) {

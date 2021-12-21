@@ -5,6 +5,7 @@ export const SIGN_IN = "SIGN_IN";
 export const SIGN_UP = "SIGN_UP";
 export const UPDATE_FAVOURITES = "UPDATE_FAVOURITES";
 export const REFRESH_USER = "REFRESH_USER";
+export const SIGN_OUT = "SIGN_OUT";
 
 const usersService = new UsersService();
 
@@ -39,6 +40,23 @@ export const signUp = (payload) => {
       dispatch({
         type: SIGN_UP,
         user,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const signOut = () => {
+  return async (dispatch) => {
+    try {
+      await usersService.signOut();
+
+      dispatch({
+        type: SIGN_OUT,
+        user: {
+          token: null,
+        },
       });
     } catch (error) {
       console.log(error);
