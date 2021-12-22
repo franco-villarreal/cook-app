@@ -13,9 +13,10 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { CLOUDINARY_API_KEY, CLOUDINARY_URL } from "../constants";
 import { addRecipe } from "../store/actions/recipes.actions";
-import { BigButton, CommonTextInput } from "./commons";
+import { BigButton, CommonIcon, CommonTextInput } from "./commons";
 import ImageSelector from "./ImageSelector";
 import { CommonStyles, Tags } from "../constants";
+import { Device } from "../constants";
 
 export const AddRecipe = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export const AddRecipe = ({ navigation }) => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [unselectedTags, setUnselectedTags] = useState(Tags);
   const [ingredientInput, setIngredientInput] = useState("");
+  const [ingredientQuantityInput, setIngredientQuantityInput] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [image, setImage] = useState({});
 
@@ -63,12 +65,16 @@ export const AddRecipe = ({ navigation }) => {
   const handleIngredientsChange = (text) => {
     setIngredientInput(text);
   };
+  const handleIngredientQuantityChange = (text) => {
+    setIngredientQuantityInput(text);
+  };
   const handleAddIngredient = () => {
-    if (ingredientInput) {
+    if (ingredientInput && ingredientQuantityInput) {
       const actualList = ingredients;
-      actualList.push(ingredientInput);
+      actualList.push(`${ingredientInput} ${ingredientQuantityInput}`);
       setIngredients(actualList);
       setIngredientInput("");
+      setIngredientQuantityInput("");
       console.log(ingredients);
     }
   };
@@ -140,9 +146,6 @@ export const AddRecipe = ({ navigation }) => {
       <View style={styles.tagsFeatureContainer}>
         <View style={styles.tagsContainer}>
           <FlatList
-            ListEmptyComponent={
-              <Text style={styles.tagsFeatureTitle}>Select until 3 tags!</Text>
-            }
             horizontal={true}
             contentContainerStyle={{ flex: 1, justifyContent: "center" }}
             data={selectedTags}
@@ -183,19 +186,27 @@ export const AddRecipe = ({ navigation }) => {
         </View>
       </View>
 
-      <CommonTextInput placeholder="Title" onChangeText={handleTitleChange} />
+      <CommonTextInput
+        placeholder="Title"
+        customTextStyles={{ width: "100%" }}
+        onChangeText={handleTitleChange}
+      />
       <CommonTextInput
         placeholder="Description"
+        multiline={true}
+        customTextStyles={{ width: "100%", height: Device.screenHeight / 5 }}
         onChangeText={handleDescriptionChange}
       />
       <CommonTextInput
         placeholder="Time (Minutes)"
         keyboardType="number-pad"
+        customTextStyles={{ width: "100%" }}
         onChangeText={handlePreparationTimeChange}
       />
       <CommonTextInput
         placeholder="Preparation"
         multiline={true}
+        customTextStyles={{ width: "100%", height: Device.screenHeight / 5 }}
         onChangeText={handlePreparationChange}
       />
 
@@ -203,6 +214,7 @@ export const AddRecipe = ({ navigation }) => {
         style={{
           ...CommonStyles.textInputStyle,
           ...{
+            width: "100%",
             flexDirection: "row",
             alignSelf: "center",
             alignItems: "center",
@@ -210,23 +222,31 @@ export const AddRecipe = ({ navigation }) => {
         }}
       >
         <TextInput
-          style={{ flex: 3, fontSize: 18 }}
-          placeholder="Ingredients"
+          style={{
+            flex: 3,
+            fontSize: 18,
+            borderRightColor: "gray",
+            borderRightWidth: 1,
+          }}
+          placeholder="Ingredient"
           value={ingredientInput}
           onChangeText={handleIngredientsChange}
         ></TextInput>
-        <TouchableOpacity
+        <TextInput
           style={{
-            flex: 1,
-            backgroundColor: "#e2e2e2",
-            padding: 5,
-            height: 30,
-            borderRadius: 10,
-            alignItems: "center",
+            flex: 2,
+            fontSize: 18,
+            marginLeft: 30,
           }}
-          onPress={handleAddIngredient}
-        >
-          <Text>Add</Text>
+          placeholder="Quantity"
+          value={ingredientQuantityInput}
+          onChangeText={handleIngredientQuantityChange}
+        ></TextInput>
+        <TouchableOpacity onPress={handleAddIngredient}>
+          <CommonIcon
+            focused={false}
+            options={{ icon: "add-circle", size: 40 }}
+          />
         </TouchableOpacity>
       </View>
 
@@ -237,7 +257,7 @@ export const AddRecipe = ({ navigation }) => {
               No ingredients added
             </Text>
           }
-          horizontal={true}
+          horizontal={false}
           data={ingredients}
           keyExtractor={(ingredient) => ingredient}
           renderItem={({ item }) => (
@@ -249,7 +269,7 @@ export const AddRecipe = ({ navigation }) => {
               }}
             >
               <Text style={{ ...styles.ingredientsText, color: "gray" }}>
-                - {item}
+                {">"} {item}
               </Text>
             </TouchableOpacity>
           )}
@@ -263,11 +283,7 @@ export const AddRecipe = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   ingredientsFeatureContainer: {
-    width: "80%",
-    alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    alignSelf: "center",
+    width: "100%",
     marginVertical: 20,
   },
   ingredientsFeatureTitle: {
@@ -277,13 +293,8 @@ const styles = StyleSheet.create({
   ingredientsContainer: {
     flexDirection: "row",
     marginVertical: 5,
-    alignContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    justifyContent: "center",
   },
   ingredientsTouchable: {
-    alignItems: "center",
     marginRight: 5,
     padding: 5,
   },
@@ -291,7 +302,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   tagsFeatureContainer: {
-    width: "80%",
+    width: "100%",
     alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
@@ -304,7 +315,7 @@ const styles = StyleSheet.create({
   },
   tagsContainer: {
     flexDirection: "row",
-    marginVertical: 5,
+    marginVertical: 10,
     alignContent: "center",
     alignItems: "center",
     alignSelf: "center",

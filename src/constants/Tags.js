@@ -34,6 +34,11 @@ export const Tags = [
     name: "Experimental",
     color: "indigo",
   },
+  {
+    id: "8",
+    name: "Chicken",
+    color: "orange",
+  },
 ];
 
 export default Tags;
