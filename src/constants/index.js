@@ -4,3 +4,4 @@ export * from "./Device";
 export * from "./Firebase";
 export * from "./Tags";
 export * from "./Cloudinary";
+export * from "./Parameters";

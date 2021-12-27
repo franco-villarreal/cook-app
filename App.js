@@ -5,11 +5,7 @@ import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import store from "./src/store";
 import { AppNavigator } from "./src/navigation";
-
 import { init } from "./src/database";
-
-// TODO: check app.js permissions
-// TODO: check splash screen and icon image size
 
 init()
   .then(() => console.log(`Database initialized`))

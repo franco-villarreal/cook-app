@@ -15,6 +15,7 @@ export const Colors = {
   primaryText: "#000000", //black
   secondaryText: "#A2A2A2", //gray
   lightText: "#FFFFFF",
+  success: "#39D21E",
 };
 
 export default Colors;

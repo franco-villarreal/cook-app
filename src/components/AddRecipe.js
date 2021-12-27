@@ -11,12 +11,20 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
-import { CLOUDINARY_API_KEY, CLOUDINARY_URL } from "../constants";
 import { addRecipe } from "../store/actions/recipes.actions";
 import { BigButton, CommonIcon, CommonTextInput } from "./commons";
 import ImageSelector from "./ImageSelector";
-import { CommonStyles, Tags } from "../constants";
-import { Device } from "../constants";
+import {
+  Device,
+  CommonStyles,
+  Parameters,
+  Tags,
+  CLOUDINARY_API_KEY,
+  CLOUDINARY_URL,
+} from "../constants";
+
+const titleErrorText = `Title is required. Type at least ${Parameters.TITLE_MIN_LENGTH} characters.`;
+const descriptionErrorText = `Description is required. Type at least ${Parameters.DESCRIPTION_MIN_LENGTH} characters.`;
 
 export const AddRecipe = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -85,7 +93,7 @@ export const AddRecipe = ({ navigation }) => {
   };
   const handleAddRecipe = async () => {
     if (
-      titleInput &&
+      titleInput.isValid &&
       descriptionInput &&
       preparationTimeInput &&
       preparationInput &&
@@ -95,7 +103,7 @@ export const AddRecipe = ({ navigation }) => {
       const newRecipe = {
         id: uuidv4(),
         user: user.userId,
-        title: titleInput,
+        title: titleInput.value,
         description: descriptionInput,
         preparationTimeInMins: preparationTimeInput,
         tags: selectedTags,
@@ -104,7 +112,7 @@ export const AddRecipe = ({ navigation }) => {
         url,
         valoration: 0,
       };
-      console.log(`${titleInput} added!`);
+      console.log(`${titleInput.value} added!`);
       dispatch(addRecipe(newRecipe));
       console.log(newRecipe);
       navigation.navigate("Home");
@@ -189,25 +197,38 @@ export const AddRecipe = ({ navigation }) => {
       <CommonTextInput
         placeholder="Title"
         customTextStyles={{ width: "100%" }}
-        onChangeText={handleTitleChange}
+        onInputChange={handleTitleChange}
+        required={true}
+        minLength={Parameters.TITLE_MIN_LENGTH}
+        errorText={titleErrorText}
       />
       <CommonTextInput
         placeholder="Description"
         multiline={true}
         customTextStyles={{ width: "100%", height: Device.screenHeight / 5 }}
-        onChangeText={handleDescriptionChange}
+        onInputChange={handleDescriptionChange}
+        required={true}
+        minLength={Parameters.DESCRIPTION_MIN_LENGTH}
+        errorText={descriptionErrorText}
       />
       <CommonTextInput
         placeholder="Time (Minutes)"
         keyboardType="number-pad"
         customTextStyles={{ width: "100%" }}
-        onChangeText={handlePreparationTimeChange}
+        onInputChange={handlePreparationTimeChange}
+        required={true}
+        min={1}
+        max={181}
+        errorText={`Preparation time should be especified.`}
       />
       <CommonTextInput
         placeholder="Preparation"
         multiline={true}
         customTextStyles={{ width: "100%", height: Device.screenHeight / 5 }}
-        onChangeText={handlePreparationChange}
+        onInputChange={handlePreparationChange}
+        required={true}
+        minLength={12}
+        errorText={`Preparation instructions are required.`}
       />
 
       <View
