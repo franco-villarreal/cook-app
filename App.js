@@ -8,10 +8,11 @@ import { AppNavigator } from "./src/navigation";
 import { init } from "./src/database";
 
 init()
-  .then(() => console.log(`Database initialized`))
+  .then(() => console.log(`Device database initialized successfully`))
   .catch((err) => {
-    console.log("Database error");
-    console.log(err);
+    console.log(
+      `There was an error initializing device database : ${JSON.stringify(err)}`
+    );
   });
 
 export default function App() {

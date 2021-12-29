@@ -29,7 +29,6 @@ const FavouriteButton = ({ size = "26", black = true }) => {
   );
 
   const handleFavourites = () => {
-    console.log(user);
     const favourites = [...user.favourites];
     if (!favourite) {
       const payload = {

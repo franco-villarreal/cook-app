@@ -15,11 +15,9 @@ export const signIn = (payload) => {
       signOut();
       const user = await usersService.signIn(payload);
 
-      console.log(`Sign in successfully! ${JSON.stringify(user)}`);
+      console.log(`Sign in successfully: ${JSON.stringify(user)}`);
 
       const result = await insertUser(user);
-
-      console.log(result);
 
       dispatch({
         type: SIGN_IN,
@@ -27,6 +25,7 @@ export const signIn = (payload) => {
       });
     } catch (error) {
       console.log(error.message);
+      throw error;
     }
   };
 };
@@ -36,7 +35,7 @@ export const signUp = (payload) => {
     try {
       const user = await usersService.signUp(payload);
 
-      console.log(`Sign up successfully! ${JSON.stringify(user)}`);
+      console.log(`Sign up successfully: ${JSON.stringify(user)}`);
 
       dispatch({
         type: SIGN_UP,
@@ -90,7 +89,6 @@ export const refreshUser = () => {
 
       if (data.rows._array[0]) {
         const session = data.rows._array[0];
-        console.log(session);
         user = await usersService.getUserById(session.userId);
         user.token = session.token;
         console.log(user);

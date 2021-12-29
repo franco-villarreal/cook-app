@@ -6,9 +6,10 @@ import Recipes from "../components/Recipes";
 export const FavouritesScreen = ({ navigation }) => {
   const recipes = useSelector((state) => state.recipes.filteredRecipes);
   const userFavourites = useSelector((state) => state.user.favourites);
-  const favouritesRecipes = recipes.filter((recipe) =>
-    userFavourites.includes(recipe.id)
-  );
+  const favouritesRecipes =
+    recipes.length === 0
+      ? recipes.filter((recipe) => userFavourites.includes(recipe.id))
+      : [];
 
   return (
     <View

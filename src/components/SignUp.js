@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Text } from "react-native";
-import { BigButton, CommonTextInput, SecureTextInput } from "./commons";
-import { CommonStyles, Device } from "../constants";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { BigButton, CommonTextInput, CustomModal } from "./commons";
+import { CommonStyles, Device, ErrorMessage } from "../constants";
 import { useDispatch } from "react-redux";
 import { signUp } from "../store/actions/user.actions";
 
@@ -12,6 +12,8 @@ export const SignUp = ({ navigation }) => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalText, setModalText] = useState({});
 
   const handleNameInputChange = (name) => setNameInput(name);
   const handleLastnameInputChange = (lastname) => setLastnameInput(lastname);
@@ -19,60 +21,109 @@ export const SignUp = ({ navigation }) => {
   const handlePasswordInputChange = (password) => setPasswordInput(password);
   const handleConfirmPasswordInputChange = (confirmPassword) =>
     setConfirmPasswordInput(confirmPassword);
-
   const handleSignUp = () => {
-    if (passwordInput === confirmPasswordInput) {
-      const payload = {
-        name: nameInput,
-        lastname: lastnameInput,
-        email: emailInput,
-        password: passwordInput,
-      };
-      dispatch(signUp(payload));
-    } else {
-      console.log(`Passwords does not match!`);
+    if (
+      nameInput === "" ||
+      lastnameInput === "" ||
+      emailInput === "" ||
+      passwordInput === "" ||
+      confirmPasswordInput === ""
+    ) {
+      console.log("ERROR");
+      setModalText({
+        title: "Error",
+        text: "Fields cannot be empty!",
+        confirm: "Retry",
+      });
+      setModalVisible(true);
+      return;
     }
+    if (passwordInput !== confirmPasswordInput) {
+      console.log("ERROR");
+      setModalText({
+        title: "Error",
+        text: ErrorMessage.PASSWORDS_DOES_NOT_MATCH,
+        confirm: "Retry",
+      });
+      setModalVisible(true);
+      return;
+    }
+    const payload = {
+      name: nameInput,
+      lastname: lastnameInput,
+      email: emailInput,
+      password: passwordInput,
+    };
+    dispatch(signUp(payload));
   };
   const handleSignIn = () => {
-    console.log("Navigate to Sign In Screen");
     navigation.navigate("SignIn");
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={CommonStyles.titleStyles}>Let's sign up!</Text>
       </View>
-      <View style={styles.inputsContainer}>
+      <ScrollView style={styles.inputsContainer}>
         <CommonTextInput
           placeholder="Name"
-          onChangeText={handleNameInputChange}
+          onInputChange={handleNameInputChange}
+          validations={{
+            required: true,
+          }}
+          errorMessage={ErrorMessage.INVALID_NAME}
         />
         <CommonTextInput
           placeholder="Lastname"
-          onChangeText={handleLastnameInputChange}
+          onInputChange={handleLastnameInputChange}
+          validations={{
+            required: true,
+          }}
+          errorMessage={ErrorMessage.INVALID_LASTNAME}
         />
         <CommonTextInput
           placeholder="Email"
-          onChangeText={handleEmailInputChange}
+          onInputChange={handleEmailInputChange}
+          validations={{
+            required: true,
+            isEmail: true,
+          }}
+          errorMessage={ErrorMessage.INVALID_EMAIL}
         />
-        <SecureTextInput
+        <CommonTextInput
           placeholder="Password"
-          onChangeText={handlePasswordInputChange}
+          onInputChange={handlePasswordInputChange}
+          isSecureTextEntry={true}
+          validations={{
+            required: true,
+          }}
+          errorMessage={ErrorMessage.INVALID_PASSWORD}
         />
-        <SecureTextInput
+        <CommonTextInput
           placeholder="Confirm password"
-          onChangeText={handleConfirmPasswordInputChange}
+          onInputChange={handleConfirmPasswordInputChange}
+          isSecureTextEntry={true}
+          validations={{
+            required: true,
+          }}
+          errorMessage={ErrorMessage.INVALID_PASSWORD}
         />
-      </View>
+        <View style={styles.buttonsContainer}>
+          <BigButton text="Sign Up" onPress={handleSignUp}></BigButton>
+          <BigButton
+            text="I'm already registered"
+            type="secondary"
+            onPress={handleSignIn}
+          ></BigButton>
+        </View>
+      </ScrollView>
 
-      <View style={styles.buttonsContainer}>
-        <BigButton text="Sign Up" onPress={handleSignUp}></BigButton>
-        <BigButton
-          text="I'm already registered"
-          type="secondary"
-          onPress={handleSignIn}
-        ></BigButton>
-      </View>
+      <CustomModal
+        texts={modalText}
+        visibility={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </View>
   );
 };
@@ -88,14 +139,14 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
   },
-  inputsContainer: {
-    flex: 6,
-  },
+  inputsContainer: {},
   inputContainer: {
     alignItems: "center",
+    flex: 6,
   },
   buttonsContainer: {
     flex: 3,
+    marginVertical: 50,
   },
 });
 

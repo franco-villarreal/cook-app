@@ -22,6 +22,7 @@ import {
   CLOUDINARY_API_KEY,
   CLOUDINARY_URL,
 } from "../constants";
+import Error from "../constants/ErrorMessage";
 
 const titleErrorText = `Title is required. Type at least ${Parameters.TITLE_MIN_LENGTH} characters.`;
 const descriptionErrorText = `Description is required. Type at least ${Parameters.DESCRIPTION_MIN_LENGTH} characters.`;
@@ -54,7 +55,7 @@ export const AddRecipe = ({ navigation }) => {
   };
   const handleAddTag = (name) => {
     if (selectedTags.length > 2) {
-      console.log(`Error, tags limit reached!`);
+      console.log(`There was an error: ${Error.TAGS_LIMIT_REACHED}`);
       return;
     }
     const updatedSelectedTags = selectedTags;
@@ -64,7 +65,7 @@ export const AddRecipe = ({ navigation }) => {
       (item) => item.name !== name
     );
     setUnselectedTags(updatedUnselectedTags);
-    console.log(`Add tag ${name}`);
+    console.log(`Added tag: ${name}`);
   };
   const handleRemoveTags = () => {
     setSelectedTags([]);
@@ -83,13 +84,11 @@ export const AddRecipe = ({ navigation }) => {
       setIngredients(actualList);
       setIngredientInput("");
       setIngredientQuantityInput("");
-      console.log(ingredients);
     }
   };
   const handlePickImage = (image) => {
     const base64Image = `data:image/jpg;base64,${image.base64}`;
     setImage({ localUri: image.uri, base64: base64Image });
-    console.log(image);
   };
   const handleAddRecipe = async () => {
     if (
@@ -112,13 +111,11 @@ export const AddRecipe = ({ navigation }) => {
         url,
         valoration: 0,
       };
-      console.log(`${titleInput.value} added!`);
       dispatch(addRecipe(newRecipe));
-      console.log(newRecipe);
+      console.log(`New recipe added: ${newRecipe}`);
       navigation.navigate("Home");
     }
   };
-
   const uploadImage = async () => {
     let payload = {
       file: image.base64,
@@ -135,7 +132,6 @@ export const AddRecipe = ({ navigation }) => {
       });
 
       let data = await response.json();
-      console.log(data.url);
 
       return data.url;
     } catch (error) {

@@ -1,21 +1,28 @@
-import { FIRESTORE_URL, SIGN_IN_URL, SIGN_UP_URL } from "../constants/Firebase";
+import {
+  FIRESTORE_URL,
+  AUTHENTICATION_URL,
+  AUTHENTICATION_API_KEY,
+} from "../constants/Firebase";
 import { deleteUser } from "../database";
 
 export class UsersService {
   constructor() {}
 
   async signIn(payload) {
-    const response = await fetch(SIGN_IN_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: payload.email,
-        password: payload.password,
-        returnSecureToken: true,
-      }),
-    });
+    const response = await fetch(
+      `${AUTHENTICATION_URL}/v1/accounts:signInWithPassword?key=${AUTHENTICATION_API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: payload.email,
+          password: payload.password,
+          returnSecureToken: true,
+        }),
+      }
+    );
 
     const data = await response.json();
 
@@ -32,17 +39,20 @@ export class UsersService {
   }
 
   async signUp(payload) {
-    const response = await fetch(SIGN_UP_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: payload.email,
-        password: payload.password,
-        returnSecureToken: true,
-      }),
-    });
+    const response = await fetch(
+      `${AUTHENTICATION_URL}/v1/accounts:signUp?key=${AUTHENTICATION_API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: payload.email,
+          password: payload.password,
+          returnSecureToken: true,
+        }),
+      }
+    );
 
     const data = await response.json();
 
@@ -51,12 +61,10 @@ export class UsersService {
     }
 
     const newUser = {
-      [data.localId]: {
-        userId: data.localId,
-        name: payload.name,
-        lastname: payload.lastname,
-        email: payload.email,
-      },
+      userId: data.localId,
+      name: payload.name,
+      lastname: payload.lastname,
+      email: payload.email,
     };
 
     await this.saveUser(newUser);
@@ -89,7 +97,7 @@ export class UsersService {
   }
 
   async saveUser(user) {
-    const response = await fetch(`${FIRESTORE_URL}/users.json`, {
+    const response = await fetch(`${FIRESTORE_URL}/users/${user.userId}.json`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +108,6 @@ export class UsersService {
     const data = await response.json();
 
     if (data.error) {
-      console.log(data);
       throw new Error(data.error.message);
     }
 
@@ -122,7 +129,6 @@ export class UsersService {
     const data = await response.json();
 
     if (data.error) {
-      console.log(data);
       throw new Error(data.error.message);
     }
 

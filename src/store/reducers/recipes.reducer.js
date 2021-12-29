@@ -1,4 +1,3 @@
-import recipes from "../../data/recipes";
 import {
   ADD_RECIPE,
   GET_RECIPES,

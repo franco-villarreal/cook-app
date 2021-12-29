@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, KeyboardAvoidingView } from "react-native";
-import {
-  BigButton,
-  CommonTextInput,
-  SecureTextInput,
-  CustomModal,
-} from "./commons";
+import { View, StyleSheet, Text } from "react-native";
+import { BigButton, CommonTextInput, CustomModal } from "./commons";
 import { Device, CommonStyles } from "../constants";
 import { useDispatch } from "react-redux";
 import { signIn } from "../store/actions/user.actions";
@@ -29,7 +24,9 @@ export const SignIn = ({ navigation }) => {
         confirm: "Retry",
       });
       setModalVisible(true);
-    } else if (!passwordInput) {
+      return;
+    }
+    if (!passwordInput) {
       console.log("ERROR");
       setModalText({
         title: "Error",
@@ -37,14 +34,15 @@ export const SignIn = ({ navigation }) => {
         confirm: "Retry",
       });
       setModalVisible(true);
-    } else {
-      dispatch(
-        signIn({
-          email: emailInput,
-          password: passwordInput,
-        })
-      );
+      return;
     }
+
+    dispatch(
+      signIn({
+        email: emailInput,
+        password: passwordInput,
+      })
+    );
   };
   const handleSignUp = () => navigation.navigate("SignUp");
 
@@ -57,11 +55,21 @@ export const SignIn = ({ navigation }) => {
       <View style={styles.inputsContainer}>
         <CommonTextInput
           placeholder="Email"
-          onChangeText={handleEmailInputChange}
+          onInputChange={handleEmailInputChange}
+          validations={{
+            isEmail: true,
+            required: true,
+          }}
+          errorMessage="You must enter a valid email"
         />
-        <SecureTextInput
+        <CommonTextInput
           placeholder="Password"
-          onChangeText={handlePasswordInputChange}
+          onInputChange={handlePasswordInputChange}
+          validations={{
+            required: true,
+          }}
+          isSecureTextEntry={true}
+          errorMessage="Password is required"
         />
       </View>
       <View style={styles.buttonsContainer}>
