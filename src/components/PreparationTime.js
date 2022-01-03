@@ -13,7 +13,7 @@ const PreparationTime = ({ preparationTimeInMins, size = "28" }) => {
           padding: 5,
           backgroundColor: "rgba(255,255,255,0.5)",
           borderRadius: 10,
-          width: Number(size) + 20,
+          minWidth: Number(size) + 20,
         },
       }}
     >
@@ -27,7 +27,7 @@ const PreparationTime = ({ preparationTimeInMins, size = "28" }) => {
       <Text
         style={{
           ...styles.preparationTimeInMins,
-          ...{ fontSize: Number(size) / 1.8 },
+          ...{ fontSize: Number(size) / 2 },
         }}
       >
         {preparationTimeInMins}'
