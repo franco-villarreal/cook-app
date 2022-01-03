@@ -92,7 +92,7 @@ export const AddRecipe = ({ navigation }) => {
   };
   const handleAddRecipe = async () => {
     if (
-      titleInput.isValid &&
+      titleInput &&
       descriptionInput &&
       preparationTimeInput &&
       preparationInput &&
