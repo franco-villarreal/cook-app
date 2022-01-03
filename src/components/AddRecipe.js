@@ -102,7 +102,7 @@ export const AddRecipe = ({ navigation }) => {
       const newRecipe = {
         id: uuidv4(),
         user: user.userId,
-        title: titleInput.value,
+        title: titleInput,
         description: descriptionInput,
         preparationTimeInMins: preparationTimeInput,
         tags: selectedTags,

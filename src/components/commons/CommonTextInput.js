@@ -75,7 +75,6 @@ export const CommonTextInput = ({
     if (minLength != null && text.length < minLength) isValid = false;
     if (maxLength != null && text.length > maxLength) isValid = false;
 
-    console.log(inputState);
     setIsInputValid(isValid);
 
     dispatch({
