@@ -3,14 +3,13 @@ import { View, StyleSheet, Text } from "react-native";
 import { BigButton, CommonTextInput, CustomModal } from "./commons";
 import { Device, CommonStyles } from "../constants";
 import { useDispatch } from "react-redux";
+import { updateModal } from "../store/actions/modal.actions";
 import { signIn } from "../store/actions/user.actions";
 
 export const SignIn = ({ navigation }) => {
   const dispatch = useDispatch();
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalText, setModalText] = useState({});
 
   const handleEmailInputChange = (email) => setEmailInput(email);
   const handlePasswordInputChange = (password) => setPasswordInput(password);
@@ -18,29 +17,37 @@ export const SignIn = ({ navigation }) => {
   const handleSignIn = () => {
     if (!emailInput) {
       console.log("ERROR");
-      setModalText({
-        title: "Error",
-        text: "Email cannot be empty!",
-        confirm: "Retry",
-      });
-      setModalVisible(true);
+      dispatch(
+        updateModal({
+          texts: {
+            title: "Error",
+            text: "Email cannot be empty!",
+            confirm: "Retry",
+          },
+          visibility: true,
+        })
+      );
       return;
     }
     if (!passwordInput) {
       console.log("ERROR");
-      setModalText({
-        title: "Error",
-        text: "Password cannot be empty!",
-        confirm: "Retry",
-      });
-      setModalVisible(true);
+      dispatch(
+        updateModal({
+          texts: {
+            title: "Error",
+            text: "Password cannot be empty!",
+            confirm: "Retry",
+          },
+          visibility: true,
+        })
+      );
       return;
     }
 
     dispatch(
       signIn({
-        email: emailInput,
-        password: passwordInput,
+        email: emailInput.trim(),
+        password: passwordInput.trim(),
       })
     );
   };
@@ -81,11 +88,7 @@ export const SignIn = ({ navigation }) => {
         />
       </View>
 
-      <CustomModal
-        texts={modalText}
-        visibility={modalVisible}
-        setModalVisible={setModalVisible}
-      />
+      <CustomModal />
     </View>
   );
 };

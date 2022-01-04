@@ -1,5 +1,6 @@
 import UsersService from "../../services/UsersService";
 import { getUser, insertUser } from "../../database";
+import { updateModal } from "./modal.actions";
 
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_UP = "SIGN_UP";
@@ -13,7 +14,7 @@ export const signIn = (payload) => {
   return async (dispatch) => {
     try {
       signOut();
-      const user = await usersService.signIn(payload);
+      const user = await usersService.signIn(payload, dispatch);
 
       console.log(`Sign in successfully: ${JSON.stringify(user)}`);
 
@@ -24,8 +25,16 @@ export const signIn = (payload) => {
         user,
       });
     } catch (error) {
-      console.log(error.message);
-      throw error;
+      dispatch(
+        updateModal({
+          texts: {
+            title: "Error",
+            text: error.message,
+            confirm: "Retry",
+          },
+          visibility: true,
+        })
+      );
     }
   };
 };
@@ -42,7 +51,16 @@ export const signUp = (payload) => {
         user,
       });
     } catch (error) {
-      console.log(error);
+      dispatch(
+        updateModal({
+          texts: {
+            title: "Error",
+            text: error.message,
+            confirm: "Retry",
+          },
+          visibility: true,
+        })
+      );
     }
   };
 };

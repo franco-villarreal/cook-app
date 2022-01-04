@@ -4,6 +4,7 @@ import { BigButton, CommonTextInput, CustomModal } from "./commons";
 import { CommonStyles, Device, ErrorMessage } from "../constants";
 import { useDispatch } from "react-redux";
 import { signUp } from "../store/actions/user.actions";
+import { updateModal } from "../store/actions/modal.actions";
 
 export const SignUp = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -12,8 +13,6 @@ export const SignUp = ({ navigation }) => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalText, setModalText] = useState({});
 
   const handleNameInputChange = (name) => setNameInput(name);
   const handleLastnameInputChange = (lastname) => setLastnameInput(lastname);
@@ -21,7 +20,7 @@ export const SignUp = ({ navigation }) => {
   const handlePasswordInputChange = (password) => setPasswordInput(password);
   const handleConfirmPasswordInputChange = (confirmPassword) =>
     setConfirmPasswordInput(confirmPassword);
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     if (
       nameInput === "" ||
       lastnameInput === "" ||
@@ -30,29 +29,34 @@ export const SignUp = ({ navigation }) => {
       confirmPasswordInput === ""
     ) {
       console.log("ERROR");
-      setModalText({
-        title: "Error",
-        text: "Fields cannot be empty!",
-        confirm: "Retry",
-      });
-      setModalVisible(true);
+      dispatch(
+        updateModal({
+          texts: {
+            title: "Error",
+            text: "Fields cannot be empty!",
+            confirm: "Retry",
+          },
+          visibility: true,
+        })
+      );
       return;
     }
     if (passwordInput !== confirmPasswordInput) {
       console.log("ERROR");
-      setModalText({
-        title: "Error",
-        text: ErrorMessage.PASSWORDS_DOES_NOT_MATCH,
-        confirm: "Retry",
-      });
-      setModalVisible(true);
+      dispatch(
+        updateModal({
+          title: "Error",
+          text: ErrorMessage.PASSWORDS_DOES_NOT_MATCH,
+          confirm: "Retry",
+        })
+      );
       return;
     }
     const payload = {
-      name: nameInput,
-      lastname: lastnameInput,
-      email: emailInput,
-      password: passwordInput,
+      name: nameInput.trim(),
+      lastname: lastnameInput.trim(),
+      email: emailInput.trim(),
+      password: passwordInput.trim(),
     };
     dispatch(signUp(payload));
   };
@@ -119,11 +123,7 @@ export const SignUp = ({ navigation }) => {
         </View>
       </ScrollView>
 
-      <CustomModal
-        texts={modalText}
-        visibility={modalVisible}
-        setModalVisible={setModalVisible}
-      />
+      <CustomModal />
     </View>
   );
 };

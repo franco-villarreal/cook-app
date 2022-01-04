@@ -1,22 +1,41 @@
 import React from "react";
 import { Modal, View, Text, StyleSheet, Pressable } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { Colors, Device } from "../../constants";
+import { updateModal } from "../../store/actions/modal.actions";
 
-export const CustomModal = ({ texts = {}, visibility, setModalVisible }) => {
+export const CustomModal = () => {
+  const dispatch = useDispatch();
+  const modalState = useSelector((state) => state.modal);
   return (
-    <Modal animationType="slide" visible={visibility} transparent={true}>
+    <Modal
+      animationType="slide"
+      visible={modalState.visibility}
+      transparent={true}
+    >
       <View style={styles.container}>
-        <Text style={styles.title}>{texts.title}</Text>
-        <Text style={styles.text}>{texts.text}</Text>
+        <Text style={styles.title}>{modalState.texts.title}</Text>
+        <Text style={styles.text}>{modalState.texts.text}</Text>
         <View style={styles.pressablesContainer}>
           <Pressable style={styles.pressable}>
             <Text style={styles.pressableText}></Text>
           </Pressable>
           <Pressable
             style={styles.pressable}
-            onPress={() => setModalVisible(!visibility)}
+            onPress={() =>
+              dispatch(
+                updateModal({
+                  texts: {
+                    title: "",
+                    text: "",
+                    confirm: "",
+                  },
+                  visibility: false,
+                })
+              )
+            }
           >
-            <Text style={styles.pressableText}>{texts.confirm}</Text>
+            <Text style={styles.pressableText}>{modalState.texts.confirm}</Text>
           </Pressable>
         </View>
       </View>
