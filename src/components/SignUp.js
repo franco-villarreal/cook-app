@@ -45,9 +45,12 @@ export const SignUp = ({ navigation }) => {
       console.log("ERROR");
       dispatch(
         updateModal({
-          title: "Error",
-          text: ErrorMessage.PASSWORDS_DOES_NOT_MATCH,
-          confirm: "Retry",
+          texts: {
+            title: "Error",
+            text: ErrorMessage.PASSWORDS_DOES_NOT_MATCH,
+            confirm: "Retry",
+          },
+          visibility: true,
         })
       );
       return;
